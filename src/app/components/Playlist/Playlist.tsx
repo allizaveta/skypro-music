@@ -16,7 +16,7 @@ const Playlist = () => {
           </div>
           <div className={classNames(styles.playlistTitle__col, styles.col04)}>
             <svg className={styles.playlistTitleSvg}>
-              <use xlinkHref="img/icon/sprite.svg#icon-watch" />
+              <use xlinkHref="Image/icon/sprite.svg#icon-watch" />
             </svg>
           </div>
         </div>
@@ -26,7 +26,7 @@ const Playlist = () => {
               <div className={styles.trackTitle}>
                 <div className={styles.trackTitleImage}>
                   <svg className={styles.trackTitleSvg}>
-                    <use xlinkHref="img/icon/sprite.svg#icon-note" />
+                    <use xlinkHref="../Image/icon/sprite.svg#icon-note" />
                   </svg>
                 </div>
                 <div className="track__title-text">
@@ -47,7 +47,7 @@ const Playlist = () => {
               </div>
               <div className="track__time">
                 <svg className={styles.trackTimeSvg}>
-                  <use xlinkHref="img/icon/sprite.svg#icon-like" />
+                  <use xlinkHref="Image/iconicon/sprite.svg#icon-like" />
                 </svg>
                 <span className={styles.trackTimeText}>4:44</span>
               </div>
@@ -58,7 +58,7 @@ const Playlist = () => {
               <div className={styles.trackTitle}>
                 <div className={styles.trackTitleImage}>
                   <svg className={styles.trackTitleSvg}>
-                    <use xlinkHref="img/icon/sprite.svg#icon-note" />
+                    <use xlinkHref="Image/iconicon/sprite.svg#icon-note" />
                   </svg>
                 </div>
                 <div className="track__title-text">
@@ -79,7 +79,7 @@ const Playlist = () => {
               </div>
               <div className="track__time">
                 <svg className={styles.trackTimeSvg}>
-                  <use xlinkHref="img/icon/sprite.svg#icon-like" />
+                  <use xlinkHref="Image/iconicon/sprite.svg#icon-like" />
                 </svg>
                 <span className={styles.trackTimeText}>2:22</span>
               </div>
@@ -90,7 +90,7 @@ const Playlist = () => {
               <div className={styles.trackTitle}>
                 <div className={styles.trackTitleImage}>
                   <svg className={styles.trackTitleSvg}>
-                    <use xlinkHref="img/icon/sprite.svg#icon-note" />
+                    <use xlinkHref="Image/iconicon/sprite.svg#icon-note" />
                   </svg>
                 </div>
                 <div className="track__title-text">
@@ -111,7 +111,7 @@ const Playlist = () => {
               </div>
               <div className="track__time">
                 <svg className={styles.trackTimeSvg}>
-                  <use xlinkHref="img/icon/sprite.svg#icon-like" />
+                  <use xlinkHref="Image/iconicon/sprite.svg#icon-like" />
                 </svg>
                 <span className={styles.trackTimeText}>2:22</span>
               </div>
@@ -122,7 +122,7 @@ const Playlist = () => {
               <div className={styles.trackTitle}>
                 <div className={styles.trackTitleImage}>
                   <svg className={styles.trackTitleSvg}>
-                    <use xlinkHref="img/icon/sprite.svg#icon-note" />
+                    <use xlinkHref="Image/iconicon/sprite.svg#icon-note" />
                   </svg>
                 </div>
                 <div className="track__title-text">
@@ -144,7 +144,7 @@ const Playlist = () => {
               </div>
               <div className="track__time">
                 <svg className={styles.trackTimeSvg}>
-                  <use xlinkHref="img/icon/sprite.svg#icon-like" />
+                  <use xlinkHref="Image/iconicon/sprite.svg#icon-like" />
                 </svg>
                 <span className={styles.trackTimeText}>4:12</span>
               </div>
@@ -155,7 +155,7 @@ const Playlist = () => {
               <div className={styles.trackTitle}>
                 <div className={styles.trackTitleImage}>
                   <svg className={styles.trackTitleSvg}>
-                    <use xlinkHref="img/icon/sprite.svg#icon-note" />
+                    <use xlinkHref="Image/iconicon/sprite.svg#icon-note" />
                   </svg>
                 </div>
                 <div className="track__title-text">
@@ -177,7 +177,7 @@ const Playlist = () => {
               </div>
               <div className="track__time">
                 <svg className={styles.trackTimeSvg}>
-                  <use xlinkHref="img/icon/sprite.svg#icon-like" />
+                  <use xlinkHref="Image/iconicon/sprite.svg#icon-like" />
                 </svg>
                 <span className={styles.trackTimeText}>2:54</span>
               </div>
@@ -188,7 +188,7 @@ const Playlist = () => {
               <div className={styles.trackTitle}>
                 <div className={styles.trackTitleImage}>
                   <svg className={styles.trackTitleSvg}>
-                    <use xlinkHref="img/icon/sprite.svg#icon-note" />
+                    <use xlinkHref="Image/iconicon/sprite.svg#icon-note" />
                   </svg>
                 </div>
                 <div className="track__title-text">
@@ -212,7 +212,7 @@ const Playlist = () => {
               </div>
               <div className="track__time">
                 <svg className={styles.trackTimeSvg}>
-                  <use xlinkHref="img/icon/sprite.svg#icon-like" />
+                  <use xlinkHref="Image/iconicon/sprite.svg#icon-like" />
                 </svg>
                 <span className={styles.trackTimeText}>5:20</span>
               </div>
@@ -223,7 +223,7 @@ const Playlist = () => {
               <div className={styles.trackTitle}>
                 <div className={styles.trackTitleImage}>
                   <svg className={styles.trackTitleSvg}>
-                    <use xlinkHref="img/icon/sprite.svg#icon-note" />
+                    <use xlinkHref="Image/iconicon/sprite.svg#icon-note" />
                   </svg>
                 </div>
                 <div className="track__title-text">
@@ -247,7 +247,7 @@ const Playlist = () => {
               </div>
               <div className="track__time">
                 <svg className={styles.trackTimeSvg}>
-                  <use xlinkHref="img/icon/sprite.svg#icon-like" />
+                  <use xlinkHref="Image/iconicon/sprite.svg#icon-like" />
                 </svg>
                 <span className={styles.trackTimeText}>3:41</span>
               </div>
@@ -258,7 +258,7 @@ const Playlist = () => {
               <div className={styles.trackTitle}>
                 <div className={styles.trackTitleImage}>
                   <svg className={styles.trackTitleSvg}>
-                    <use xlinkHref="img/icon/sprite.svg#icon-note" />
+                    <use xlinkHref="Image/iconicon/sprite.svg#icon-note" />
                   </svg>
                 </div>
                 <div className="track__title-text">
@@ -280,7 +280,7 @@ const Playlist = () => {
               </div>
               <div className="track__time">
                 <svg className={styles.trackTimeSvg}>
-                  <use xlinkHref="img/icon/sprite.svg#icon-like" />
+                  <use xlinkHref="Image/iconicon/sprite.svg#icon-like" />
                 </svg>
                 <span className={styles.trackTimeText}>1:48</span>
               </div>
@@ -291,7 +291,7 @@ const Playlist = () => {
               <div className={styles.trackTitle}>
                 <div className={styles.trackTitleImage}>
                   <svg className={styles.trackTitleSvg}>
-                    <use xlinkHref="img/icon/sprite.svg#icon-note" />
+                    <use xlinkHref="Image/iconicon/sprite.svg#icon-note" />
                   </svg>
                 </div>
                 <div className="track__title-text">
@@ -313,7 +313,7 @@ const Playlist = () => {
               </div>
               <div className="track__time">
                 <svg className={styles.trackTimeSvg}>
-                  <use xlinkHref="img/icon/sprite.svg#icon-like" />
+                  <use xlinkHref="Image/iconicon/sprite.svg#icon-like" />
                 </svg>
                 <span className={styles.trackTimeText}>1:48</span>
               </div>
@@ -324,7 +324,7 @@ const Playlist = () => {
               <div className={styles.trackTitle}>
                 <div className={styles.trackTitleImage}>
                   <svg className={styles.trackTitleSvg}>
-                    <use xlinkHref="img/icon/sprite.svg#icon-note" />
+                    <use xlinkHref="Image/iconicon/sprite.svg#icon-note" />
                   </svg>
                 </div>
                 <div className="track__title-text">
@@ -346,7 +346,7 @@ const Playlist = () => {
               </div>
               <div className="track__time">
                 <svg className={styles.trackTimeSvg}>
-                  <use xlinkHref="img/icon/sprite.svg#icon-like" />
+                  <use xlinkHref="Image/iconicon/sprite.svg#icon-like" />
                 </svg>
                 <span className={styles.trackTimeText}>1:48</span>
               </div>
@@ -357,7 +357,7 @@ const Playlist = () => {
               <div className={styles.trackTitle}>
                 <div className={styles.trackTitleImage}>
                   <svg className={styles.trackTitleSvg}>
-                    <use xlinkHref="img/icon/sprite.svg#icon-note" />
+                    <use xlinkHref="Image/iconicon/sprite.svg#icon-note" />
                   </svg>
                 </div>
                 <div className="track__title-text">
@@ -379,7 +379,7 @@ const Playlist = () => {
               </div>
               <div className="track__time">
                 <svg className={styles.trackTimeSvg}>
-                  <use xlinkHref="img/icon/sprite.svg#icon-like" />
+                  <use xlinkHref="Image/iconicon/sprite.svg#icon-like" />
                 </svg>
                 <span className={styles.trackTimeText}>1:48</span>
               </div>
@@ -390,7 +390,7 @@ const Playlist = () => {
               <div className={styles.trackTitle}>
                 <div className={styles.trackTitleImage}>
                   <svg className={styles.trackTitleSvg}>
-                    <use xlinkHref="img/icon/sprite.svg#icon-note" />
+                    <use xlinkHref="Image/iconicon/sprite.svg#icon-note" />
                   </svg>
                 </div>
                 <div className="track__title-text">
@@ -412,7 +412,7 @@ const Playlist = () => {
               </div>
               <div className="track__time">
                 <svg className={styles.trackTimeSvg}>
-                  <use xlinkHref="img/icon/sprite.svg#icon-like" />
+                  <use xlinkHref="Image/iconicon/sprite.svg#icon-like" />
                 </svg>
                 <span className={styles.trackTimeText}>1:48</span>
               </div>
@@ -423,7 +423,7 @@ const Playlist = () => {
               <div className={styles.trackTitle}>
                 <div className={styles.trackTitleImage}>
                   <svg className={styles.trackTitleSvg}>
-                    <use xlinkHref="img/icon/sprite.svg#icon-note" />
+                    <use xlinkHref="Image/iconicon/sprite.svg#icon-note" />
                   </svg>
                 </div>
                 <div className="track__title-text">
@@ -445,7 +445,7 @@ const Playlist = () => {
               </div>
               <div className="track__time">
                 <svg className={styles.trackTimeSvg}>
-                  <use xlinkHref="img/icon/sprite.svg#icon-like" />
+                  <use xlinkHref="Image/iconicon/sprite.svg#icon-like" />
                 </svg>
                 <span className={styles.trackTimeText}>1:48</span>
               </div>
@@ -456,7 +456,7 @@ const Playlist = () => {
               <div className={styles.trackTitle}>
                 <div className={styles.trackTitleImage}>
                   <svg className={styles.trackTitleSvg}>
-                    <use xlinkHref="img/icon/sprite.svg#icon-note" />
+                    <use xlinkHref="Image/iconicon/sprite.svg#icon-note" />
                   </svg>
                 </div>
                 <div className="track__title-text">
@@ -478,7 +478,7 @@ const Playlist = () => {
               </div>
               <div className="track__time">
                 <svg className={styles.trackTimeSvg}>
-                  <use xlinkHref="img/icon/sprite.svg#icon-like" />
+                  <use xlinkHref="Image/iconicon/sprite.svg#icon-like" />
                 </svg>
                 <span className={styles.trackTimeText}>1:48</span>
               </div>
@@ -489,7 +489,7 @@ const Playlist = () => {
               <div className={styles.trackTitle}>
                 <div className={styles.trackTitleImage}>
                   <svg className={styles.trackTitleSvg}>
-                    <use xlinkHref="img/icon/sprite.svg#icon-note" />
+                    <use xlinkHref="Image/iconicon/sprite.svg#icon-note" />
                   </svg>
                 </div>
                 <div className="track__title-text">
@@ -511,7 +511,7 @@ const Playlist = () => {
               </div>
               <div className="track__time">
                 <svg className={styles.trackTimeSvg}>
-                  <use xlinkHref="img/icon/sprite.svg#icon-like" />
+                  <use xlinkHref="Image/iconicon/sprite.svg#icon-like" />
                 </svg>
                 <span className={styles.trackTimeText}>3:32</span>
               </div>
@@ -522,7 +522,7 @@ const Playlist = () => {
               <div className={styles.trackTitle}>
                 <div className={styles.trackTitleImage}>
                   <svg className={styles.trackTitleSvg}>
-                    <use xlinkHref="img/icon/sprite.svg#icon-note" />
+                    <use xlinkHref="Image/iconicon/sprite.svg#icon-note" />
                   </svg>
                 </div>
                 <div className="track__title-text">
@@ -543,7 +543,7 @@ const Playlist = () => {
               </div>
               <div className="track__time">
                 <svg className={styles.trackTimeSvg}>
-                  <use xlinkHref="img/icon/sprite.svg#icon-like" />
+                  <use xlinkHref="Image/iconicon/sprite.svg#icon-like" />
                 </svg>
                 <span className={styles.trackTimeText}>3:36</span>
               </div>
@@ -554,7 +554,7 @@ const Playlist = () => {
               <div className={styles.trackTitle}>
                 <div className={styles.trackTitleImage}>
                   <svg className={styles.trackTitleSvg}>
-                    <use xlinkHref="img/icon/sprite.svg#icon-note" />
+                    <use xlinkHref="Image/iconicon/sprite.svg#icon-note" />
                   </svg>
                 </div>
                 <div className="track__title-text">
@@ -571,7 +571,7 @@ const Playlist = () => {
               </div>
               <div className="track__time">
                 <svg className={styles.trackTimeSvg}>
-                  <use xlinkHref="img/icon/sprite.svg#icon-like" />
+                  <use xlinkHref="Image/iconicon/sprite.svg#icon-like" />
                 </svg>
                 <span className={styles.trackTimeText} />
               </div>
