@@ -1,8 +1,11 @@
+"use client";
 import Image from "next/image";
 import styles from "./Nav.module.css";
 import Menu from "../Menu/Menu";
+import { useState } from "react";
 
 const Nav = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <nav className={styles.mainNav}>
       <div className={styles.navLogo}>
@@ -14,12 +17,15 @@ const Nav = () => {
           alt="skypro logo"
         />
       </div>
-      <div className={styles.navBurger}>
+      <div
+        className={styles.navBurger}
+        onClick={() => setIsOpen((prev) => !prev)}
+      >
         <span className={styles.burgerLine} />
         <span className={styles.burgerLine} />
         <span className={styles.burgerLine} />
       </div>
-      <Menu />
+      {isOpen && <Menu />}
     </nav>
   );
 };
