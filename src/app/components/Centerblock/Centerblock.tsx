@@ -20,10 +20,14 @@ export async function Centerblock() {
     <div className={styles.mainCenterblock}>
       <Search />
       <h2 className={styles.centerblockH2}>Треки</h2>
-      <Filter tracks={tracks} />
-      <Playlist tracks={tracks} />
+      {error ? (
+        <div>{error}</div>
+      ) : (
+        <>
+          <Filter tracks={tracks} />
+          <Playlist tracks={tracks} />
+        </>
+      )}
     </div>
   );
 }
-
-/* оформить отображение эррор месадж */
