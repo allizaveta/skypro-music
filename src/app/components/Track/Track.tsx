@@ -1,11 +1,17 @@
 import { TrackType } from "@/types/tracks";
 import styles from "./Track.module.css";
+import { useCurrentTrack } from "@/contexts/CurrentTrackProvider";
 
 type TrackProps = {
   track: TrackType;
 };
 const Track = ({ track }: TrackProps) => {
+  const { setCurrentTrack } = useCurrentTrack();
   const { name, author, album, duration_in_seconds } = track;
+
+  const handleTrackClick = () => {
+    setCurrentTrack(track); 
+  }
 
   const formatDuration = (seconds: number): string => {
     const minutes = Math.floor(seconds / 60);
@@ -16,7 +22,7 @@ const Track = ({ track }: TrackProps) => {
     )}`;
   };
   return (
-    <div className={styles.playlistItem}>
+    <div onClick={handleTrackClick} className={styles.playlistItem}>
       <div className={styles.playlistTrack}>
         <div className={styles.trackTitle}>
           <div className={styles.trackTitleImage}>
