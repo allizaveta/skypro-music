@@ -32,8 +32,8 @@ export function CurrentTrackProvider({ children }: CurrentTrackProviderProps) {
 
 export function useCurrentTrack() {
   const context = useContext(CurrentTrackContext);
-  if(context === undefined){
-    throw new Error ("UseCurrentTrack должен использоваться внутри провайдера")
+  if (context === undefined) {
+    throw new Error("UseCurrentTrack должен использоваться внутри провайдера");
   }
   return context;
 }
