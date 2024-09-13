@@ -1,3 +1,4 @@
+"use client"
 import { TrackType } from "@/types/tracks";
 import styles from "./Track.module.css";
 import { useCurrentTrack } from "@/contexts/CurrentTrackProvider";
@@ -24,7 +25,7 @@ const Track = ({ track }: TrackProps) => {
   return (
     <div onClick={handleTrackClick} className={styles.playlistItem}>
       <div className={styles.playlistTrack}>
-        <div className={styles.trackTitle}>
+        <div className={styles.trackTitle}> 
           <div className={styles.trackTitleImage}>
             <svg className={styles.trackTitleSvg}>
               <use xlinkHref="../Image/icon/sprite.svg#icon-note" />
