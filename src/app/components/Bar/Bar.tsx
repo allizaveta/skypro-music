@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import ProgressBar from "./ProgressBar/ProgressBar";
 const Bar = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [isPlayng, setIsPlaying] = useState<boolean>(false);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const { currentTrack } = useCurrentTrack();
   const [currentTime, setCurrentTime] = useState<number>(0);
 
@@ -43,7 +43,7 @@ const Bar = () => {
   const handlePlay = () => {
     const audio = audioRef.current;
     if (audio) {
-      if (isPlayng) {
+      if (isPlaying) {
         audio.pause();
       } else {
         audio.play();
@@ -69,7 +69,7 @@ const Bar = () => {
         />
         <div className={styles.barPlayerBlock}>
           <div className={styles.barPlayer}>
-            <Player handlePlay={handlePlay} />
+            <Player handlePlay={handlePlay} isPlaying={isPlaying} />
             <TrackPlay name={name} author={author} />
           </div>
           <Volume />

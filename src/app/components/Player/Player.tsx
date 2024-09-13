@@ -3,9 +3,10 @@ import classNames from "classnames";
 
 type PlayerProps = {
   handlePlay: () => void;
+  isPlaying: boolean;
 };
 
-export function Player({ handlePlay }: PlayerProps) {
+export function Player({ handlePlay, isPlaying }: PlayerProps) {
   return (
     <div className={styles.playerControls}>
       <div className={styles.playerBtnPrev}>
@@ -14,9 +15,15 @@ export function Player({ handlePlay }: PlayerProps) {
         </svg>
       </div>
       <div className={styles.playerBtnPlay} onClick={handlePlay}>
-        <svg className={styles.playerBtnPlaySvg}>
-          <use xlinkHref="/Image/icon/sprite.svg#icon-play"></use>
-        </svg>
+        {isPlaying ? (
+          <svg className={styles.playerBtnPlaySvg}>
+            <use xlinkHref="Image/icon/sprite.svg#icon-pause" />
+          </svg>
+        ) : (
+          <svg className={styles.playerBtnPlaySvg}>
+            <use xlinkHref="Image/icon/sprite.svg#icon-play" />
+          </svg>
+        )}
       </div>
       <div className={styles.playerBtnNext}>
         <svg className={styles.playerBtnNextSvg}>
