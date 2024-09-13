@@ -69,7 +69,7 @@ const Bar = () => {
         />
         <div className={styles.barPlayerBlock}>
           <div className={styles.barPlayer}>
-            <Player />
+            <Player handlePlay={handlePlay} />
             <TrackPlay name={name} author={author} />
           </div>
           <Volume />
