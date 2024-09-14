@@ -62,6 +62,13 @@
   stroke: #696969;
 }
 
+.playerBtnRepeatSvgActive {
+  width: 18px;
+  height: 12px;
+  fill: transparent;
+  stroke: #fff;
+}
+
 ._btnIcon:hover svg {
   fill: transparent;
   stroke: #acacac;
@@ -72,6 +79,11 @@
   fill: transparent;
   stroke: #ffffff;
   cursor: pointer;
+}
+
+.active svg {
+  fill: transparent;
+  stroke: #fff;
 }
 
 ._btnIcon:active .trackPlay__likeSvg,

@@ -4,9 +4,16 @@ import classNames from "classnames";
 type PlayerProps = {
   handlePlay: () => void;
   isPlaying: boolean;
+  repeatTrack: () => void;
+  isLoop: boolean;
 };
 
-export function Player({ handlePlay, isPlaying }: PlayerProps) {
+export function Player({
+  handlePlay,
+  isPlaying,
+  repeatTrack,
+  isLoop,
+}: PlayerProps) {
   return (
     <div className={styles.playerControls}>
       <div className={styles.playerBtnPrev}>
@@ -30,9 +37,14 @@ export function Player({ handlePlay, isPlaying }: PlayerProps) {
           <use xlinkHref="/Image/icon/sprite.svg#icon-next"></use>
         </svg>
       </div>
-      <div className={classNames(styles.playerBtnRepeat, styles._btnIcon)}>
-        <svg className={styles.playerBtnRepeatSvg}>
-          <use xlinkHref="/Image/icon/sprite.svg#icon-repeat"></use>
+      <div
+        className={classNames(styles.playerBtnRepeat, styles._btnIcon, {
+          [styles.active]: isLoop,
+        })}
+        onClick={repeatTrack}
+      >
+        <svg className={classNames(styles.playerBtnRepeatSvg)}>
+          <use xlinkHref="Image/icon/sprite.svg#icon-repeat" />
         </svg>
       </div>
       <div className={classNames(styles.playerBtnShuffle, styles._btnIcon)}>

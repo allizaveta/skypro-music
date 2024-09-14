@@ -9,6 +9,7 @@ import ProgressBar from "./ProgressBar/ProgressBar";
 const Bar = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [isLoop, setIsLoop] = useState<boolean>(false);
   const { currentTrack } = useCurrentTrack();
   const [currentTime, setCurrentTime] = useState<number>(0);
 
@@ -52,6 +53,15 @@ const Bar = () => {
     setIsPlaying((prev) => !prev);
   };
 
+  const repeatTrack = () => {
+    setIsLoop(!isLoop);
+    audioRef.current!.loop = !isLoop;
+  };
+
+  function updateTime(e: React.ChangeEvent<HTMLAudioElement>) {
+    setCurrentTime(e.currentTarget.currentTime);
+  }
+
   return (
     <div className={styles.bar}>
       <div className={styles.barContent}>
@@ -60,6 +70,7 @@ const Bar = () => {
           ref={audioRef}
           controls
           src={track_file}
+          onTimeUpdate={updateTime}
         ></audio>
         <ProgressBar
           max={duration}
@@ -69,7 +80,12 @@ const Bar = () => {
         />
         <div className={styles.barPlayerBlock}>
           <div className={styles.barPlayer}>
-            <Player handlePlay={handlePlay} isPlaying={isPlaying} />
+            <Player
+              handlePlay={handlePlay}
+              isPlaying={isPlaying}
+              repeatTrack={repeatTrack}
+              isLoop={isLoop}
+            />
             <TrackPlay name={name} author={author} />
           </div>
           <Volume />
