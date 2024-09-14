@@ -79,6 +79,13 @@ const Bar = () => {
           step={0.01}
           onChange={handleSeek}
         />
+        <span className={styles.barTimers}>
+          {audioRef.current &&
+            !isNaN(audioRef.current.duration) &&
+            `${playTime(audioRef.current.currentTime)} / ${playTime(
+              audioRef.current.duration
+            )}`}
+        </span>
         <div className={styles.barPlayerBlock}>
           <div className={styles.barPlayer}>
             <Player
@@ -89,13 +96,6 @@ const Bar = () => {
             />
             <TrackPlay name={name} author={author} />
           </div>
-          <span className={styles.barTimers}>
-            {audioRef.current &&
-              !isNaN(audioRef.current.duration) &&
-              `${playTime(audioRef.current.currentTime)} / ${playTime(
-                audioRef.current.duration
-              )}`}
-          </span>
           <Volume audioRef={audioRef} />
         </div>
       </div>
