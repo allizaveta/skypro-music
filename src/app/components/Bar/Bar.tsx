@@ -88,7 +88,7 @@ const Bar = () => {
             />
             <TrackPlay name={name} author={author} />
           </div>
-          <Volume />
+          <Volume audioRef={audioRef} />
         </div>
       </div>
     </div>

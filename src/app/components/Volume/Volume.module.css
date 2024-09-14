@@ -3,8 +3,6 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   padding: 0 92px 0 0;
 }
@@ -13,16 +11,9 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: flex-end;
-  -ms-flex-pack: flex-end;
-  justify-content: flex-end;
+  justify-content: end;
 }
 
 .volumeImage {
@@ -43,8 +34,4 @@
 
 .volumeProgressLine {
   width: 109px;
-}
-
-._btn {
-  cursor: pointer;
 }
