@@ -6,6 +6,7 @@ import { Volume } from "../Volume/Volume";
 import styles from "./Bar.module.css";
 import { useEffect, useRef, useState } from "react";
 import ProgressBar from "./ProgressBar/ProgressBar";
+import { playTime } from "@/utils/playTime";
 const Bar = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -88,6 +89,13 @@ const Bar = () => {
             />
             <TrackPlay name={name} author={author} />
           </div>
+          <span className={styles.barTimers}>
+            {audioRef.current &&
+              !isNaN(audioRef.current.duration) &&
+              `${playTime(audioRef.current.currentTime)} / ${playTime(
+                audioRef.current.duration
+              )}`}
+          </span>
           <Volume audioRef={audioRef} />
         </div>
       </div>
