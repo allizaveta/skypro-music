@@ -14,9 +14,13 @@ export function Player({
   repeatTrack,
   isLoop,
 }: PlayerProps) {
+  const Alert = () => {
+    return alert("Еще не работает");
+  };
+
   return (
     <div className={styles.playerControls}>
-      <div className={styles.playerBtnPrev}>
+      <div className={styles.playerBtnPrev} onClick={Alert}>
         <svg className={styles.playerBtnPrevSvg}>
           <use xlinkHref="/Image/icon/sprite.svg#icon-prev"></use>
         </svg>
@@ -32,7 +36,7 @@ export function Player({
           </svg>
         )}
       </div>
-      <div className={styles.playerBtnNext}>
+      <div className={styles.playerBtnNext} onClick={Alert}>
         <svg className={styles.playerBtnNextSvg}>
           <use xlinkHref="/Image/icon/sprite.svg#icon-next"></use>
         </svg>
@@ -47,7 +51,10 @@ export function Player({
           <use xlinkHref="Image/icon/sprite.svg#icon-repeat" />
         </svg>
       </div>
-      <div className={classNames(styles.playerBtnShuffle, styles._btnIcon)}>
+      <div
+        className={classNames(styles.playerBtnShuffle, styles._btnIcon)}
+        onClick={Alert}
+      >
         <svg className={styles.playerBtnShuffleSvg}>
           <use xlinkHref="/Image/icon/sprite.svg#icon-shuffle"></use>
         </svg>
