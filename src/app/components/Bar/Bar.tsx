@@ -11,10 +11,12 @@ import {
   setIsShuffle,
   setNextTrack,
   setPrevTrack,
+  playTrack,
+  pauseTrack,
 } from "@/store/features/playlistSlice";
 const Bar = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const isPlaying = useAppSelector((state) => state.playlist.isPlaying);
   const [isLoop, setIsLoop] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const currentTrack = useAppSelector((state) => state.playlist.currentTrack);
@@ -36,18 +38,33 @@ const Bar = () => {
     if (!currentTrack || !currentAudio) {
       return;
     }
-    setIsPlaying(true);
+    dispatch(playTrack());
     setCurrentTime(0);
     currentAudio.currentTime = 0;
     currentAudio.play();
-  }, [currentTrack]);
+  }, [currentTrack, dispatch]);
 
-  if (!currentTrack) {
-    return null;
+  const handlePlay = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (isPlaying) {
+      audio.pause();
+      dispatch(pauseTrack());
+    } else {
+      audio.play();
+      dispatch(playTrack());
+    }
+  };
+
+  const repeatTrack = () => {
+    setIsLoop(!isLoop);
+    audioRef.current!.loop = !isLoop;
+  };
+
+  function updateTime(e: React.ChangeEvent<HTMLAudioElement>) {
+    setCurrentTime(e.currentTarget.currentTime);
   }
-  const { name, author, track_file } = currentTrack;
-
-  const duration = audioRef.current?.duration || 0;
 
   const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (audioRef.current) {
@@ -59,26 +76,8 @@ const Bar = () => {
     return null;
   }
 
-  const handlePlay = () => {
-    const audio = audioRef.current;
-    if (audio) {
-      if (isPlaying) {
-        audio.pause();
-      } else {
-        audio.play();
-      }
-    }
-    setIsPlaying((prev) => !prev);
-  };
-
-  const repeatTrack = () => {
-    setIsLoop(!isLoop);
-    audioRef.current!.loop = !isLoop;
-  };
-
-  function updateTime(e: React.ChangeEvent<HTMLAudioElement>) {
-    setCurrentTime(e.currentTarget.currentTime);
-  }
+  const { name, author, track_file } = currentTrack;
+  const duration = audioRef.current?.duration || 0;
 
   return (
     <div className={styles.bar}>
