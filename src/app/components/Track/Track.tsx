@@ -11,8 +11,8 @@ type TrackProps = {
 
 const Track = ({ track, tracks }: TrackProps) => {
   const currentTrack = useAppSelector((state) => state.playlist.currentTrack);
+  const isPlaying = useAppSelector((state) => state.playlist.isPlaying);
   const { name, author, album, duration_in_seconds, _id } = track;
-  const isPlaying = currentTrack ? currentTrack._id === _id : false;
   const dispatch = useAppDispatch();
 
   const handleTrackClick = () => {
@@ -36,7 +36,7 @@ const Track = ({ track, tracks }: TrackProps) => {
             {currentTrack?._id === _id ? (
               <svg
                 className={classNames(styles.playingTrack, {
-                  [styles.active]: isPlaying,
+                  [styles.active]: currentTrack?._id === _id && isPlaying,
                 })}
               >
                 <use xlinkHref="Image/icon/sprite.svg#icon-playingTrack"></use>
