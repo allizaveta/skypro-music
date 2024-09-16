@@ -3,15 +3,11 @@ import { TrackType } from "@/types/tracks";
 import styles from "./Playlist.module.css";
 import classNames from "classnames";
 import Track from "../Track/Track";
-import { useAppDispatch } from "@/hooks";
-import { setCurrentTrack } from "@/store/features/playlistSlice";
 type PlaylistProps = {
   tracks: TrackType[];
 };
 
 const Playlist = ({ tracks }: PlaylistProps) => {
-  const dispatch = useAppDispatch();
-
   return (
     <div className={styles.centerblockContent}>
       <div className={styles.contentTitle}>
@@ -32,11 +28,7 @@ const Playlist = ({ tracks }: PlaylistProps) => {
       </div>
       <div className={styles.contentPlaylist}>
         {tracks.map((track) => (
-          <Track
-            onClick={() => dispatch(setCurrentTrack(track))}
-            key={track.id}
-            track={track}
-          />
+          <Track key={track.id} track={track} tracks={tracks} />
         ))}
       </div>
     </div>

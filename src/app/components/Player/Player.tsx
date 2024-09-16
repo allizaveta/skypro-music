@@ -6,6 +6,10 @@ type PlayerProps = {
   isPlaying: boolean;
   repeatTrack: () => void;
   isLoop: boolean;
+  handleNextTrack: () => void;
+  handlePrevTrack: () => void;
+  handleIsShuffle: () => void;
+  isShuffle: boolean;
 };
 
 export function Player({
@@ -13,14 +17,14 @@ export function Player({
   isPlaying,
   repeatTrack,
   isLoop,
+  handleNextTrack,
+  handlePrevTrack,
+  handleIsShuffle,
+  isShuffle,
 }: PlayerProps) {
-  const Alert = () => {
-    return alert("Еще не работает");
-  };
-
   return (
     <div className={styles.playerControls}>
-      <div className={styles.playerBtnPrev} onClick={Alert}>
+      <div className={styles.playerBtnPrev} onClick={handlePrevTrack}>
         <svg className={styles.playerBtnPrevSvg}>
           <use xlinkHref="/Image/icon/sprite.svg#icon-prev"></use>
         </svg>
@@ -36,7 +40,7 @@ export function Player({
           </svg>
         )}
       </div>
-      <div className={styles.playerBtnNext} onClick={Alert}>
+      <div className={styles.playerBtnNext} onClick={handleNextTrack}>
         <svg className={styles.playerBtnNextSvg}>
           <use xlinkHref="/Image/icon/sprite.svg#icon-next"></use>
         </svg>
@@ -52,8 +56,10 @@ export function Player({
         </svg>
       </div>
       <div
-        className={classNames(styles.playerBtnShuffle, styles._btnIcon)}
-        onClick={Alert}
+        onClick={handleIsShuffle}
+        className={classNames(styles.playerBtnShuffle, styles._btnIcon, {
+          [styles.active]: isShuffle,
+        })}
       >
         <svg className={styles.playerBtnShuffleSvg}>
           <use xlinkHref="/Image/icon/sprite.svg#icon-shuffle"></use>

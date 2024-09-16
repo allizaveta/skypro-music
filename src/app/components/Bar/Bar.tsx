@@ -1,5 +1,5 @@
 "use client";
-import { useCurrentTrack } from "@/contexts/CurrentTrackProvider";
+/* import { useCurrentTrack } from "@/contexts/CurrentTrackProvider"; */
 import { Player } from "../Player/Player";
 import { TrackPlay } from "../TrackPlay/TrackPlay";
 import { Volume } from "../Volume/Volume";
@@ -7,12 +7,31 @@ import styles from "./Bar.module.css";
 import { useEffect, useRef, useState } from "react";
 import ProgressBar from "./ProgressBar/ProgressBar";
 import { playTime } from "@/utils/playTime";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import {
+  setIsShuffle,
+  setNextTrack,
+  setPrevTrack,
+} from "@/store/features/playlistSlice";
 const Bar = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [isLoop, setIsLoop] = useState<boolean>(false);
-  const { currentTrack } = useCurrentTrack();
   const [currentTime, setCurrentTime] = useState<number>(0);
+  const currentTrack = useAppSelector((state) => state.playlist.currentTrack);
+  /*   const { currentTrack } = useCurrentTrack(); */
+  const isShuffle = useAppSelector((state) => state.playlist.isShuffle);
+  const dispatch = useAppDispatch();
+
+  const handleNextTrack = () => {
+    dispatch(setNextTrack());
+  };
+  const handlePrevTrack = () => {
+    dispatch(setPrevTrack());
+  };
+  const handleIsShuffle = () => {
+    dispatch(setIsShuffle(true));
+  };
 
   useEffect(() => {
     const currentAudio = audioRef.current;
@@ -93,6 +112,10 @@ const Bar = () => {
               isPlaying={isPlaying}
               repeatTrack={repeatTrack}
               isLoop={isLoop}
+              handleNextTrack={handleNextTrack}
+              handlePrevTrack={handlePrevTrack}
+              handleIsShuffle={handleIsShuffle}
+              isShuffle={isShuffle}
             />
             <TrackPlay name={name} author={author} />
           </div>
