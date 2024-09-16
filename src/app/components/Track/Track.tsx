@@ -1,6 +1,5 @@
 import { TrackType } from "@/types/tracks";
 import styles from "./Track.module.css";
-/* import { useCurrentTrack } from "@/contexts/CurrentTrackProvider"; */
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { setCurrentTrack } from "@/store/features/playlistSlice";
 
@@ -8,11 +7,11 @@ type TrackProps = {
   track: TrackType;
   tracks: TrackType[];
 };
+
 const Track = ({ track, tracks }: TrackProps) => {
-  /*   const { setCurrentTrack } = useCurrentTrack(); */
   const currentTrack = useAppSelector((state) => state.playlist.currentTrack);
-  const { name, author, album, duration_in_seconds, id } = track;
-  const isPlaying = currentTrack ? currentTrack.id === id : false;
+  const { name, author, album, duration_in_seconds, _id } = track;
+  const isPlaying = currentTrack ? currentTrack._id === _id : false;
   const dispatch = useAppDispatch();
 
   const handleTrackClick = () => {
@@ -27,6 +26,7 @@ const Track = ({ track, tracks }: TrackProps) => {
       "0"
     )}`;
   };
+
   return (
     <div onClick={handleTrackClick} className={styles.playlistItem}>
       <div className={styles.playlistTrack}>
