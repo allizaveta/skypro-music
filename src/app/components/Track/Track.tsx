@@ -1,18 +1,18 @@
-"use client"
 import { TrackType } from "@/types/tracks";
 import styles from "./Track.module.css";
 import { useCurrentTrack } from "@/contexts/CurrentTrackProvider";
 
 type TrackProps = {
   track: TrackType;
+  onClick: () => void;
 };
-const Track = ({ track }: TrackProps) => {
+const Track = ({ track, onClick }: TrackProps) => {
   const { setCurrentTrack } = useCurrentTrack();
   const { name, author, album, duration_in_seconds } = track;
 
   const handleTrackClick = () => {
-    setCurrentTrack(track); 
-  }
+    setCurrentTrack(track);
+  };
 
   const formatDuration = (seconds: number): string => {
     const minutes = Math.floor(seconds / 60);
@@ -25,7 +25,7 @@ const Track = ({ track }: TrackProps) => {
   return (
     <div onClick={handleTrackClick} className={styles.playlistItem}>
       <div className={styles.playlistTrack}>
-        <div className={styles.trackTitle}> 
+        <div className={styles.trackTitle}>
           <div className={styles.trackTitleImage}>
             <svg className={styles.trackTitleSvg}>
               <use xlinkHref="../Image/icon/sprite.svg#icon-note" />
