@@ -30,7 +30,7 @@ const Bar = () => {
     dispatch(setPrevTrack());
   };
   const handleIsShuffle = () => {
-    dispatch(setIsShuffle(true));
+    dispatch(setIsShuffle(!isShuffle));
   };
 
   useEffect(() => {
