@@ -22,6 +22,12 @@ export default function ProgressBar({
       value={value}
       step={step}
       onChange={onChange}
+      style={
+        {
+          "--value": value,
+          "--max": max,
+        } as React.CSSProperties
+      }
     />
   );
 }
