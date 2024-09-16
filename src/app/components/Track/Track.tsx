@@ -2,6 +2,7 @@ import { TrackType } from "@/types/tracks";
 import styles from "./Track.module.css";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { setCurrentTrack } from "@/store/features/playlistSlice";
+import classNames from "classnames";
 
 type TrackProps = {
   track: TrackType;
@@ -32,8 +33,12 @@ const Track = ({ track, tracks }: TrackProps) => {
       <div className={styles.playlistTrack}>
         <div className={styles.trackTitle}>
           <div className={styles.trackTitleImage}>
-            {isPlaying ? (
-              <svg className={styles.playingTrack}>
+            {currentTrack?._id === _id ? (
+              <svg
+                className={classNames(styles.playingTrack, {
+                  [styles.active]: isPlaying,
+                })}
+              >
                 <use xlinkHref="Image/icon/sprite.svg#icon-playingTrack"></use>
               </svg>
             ) : (

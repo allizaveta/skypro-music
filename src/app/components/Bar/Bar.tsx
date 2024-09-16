@@ -1,5 +1,4 @@
 "use client";
-/* import { useCurrentTrack } from "@/contexts/CurrentTrackProvider"; */
 import { Player } from "../Player/Player";
 import { TrackPlay } from "../TrackPlay/TrackPlay";
 import { Volume } from "../Volume/Volume";
@@ -19,7 +18,6 @@ const Bar = () => {
   const [isLoop, setIsLoop] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const currentTrack = useAppSelector((state) => state.playlist.currentTrack);
-  /*   const { currentTrack } = useCurrentTrack(); */
   const isShuffle = useAppSelector((state) => state.playlist.isShuffle);
   const dispatch = useAppDispatch();
 
