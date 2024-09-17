@@ -14,6 +14,7 @@ import {
   playTrack,
   pauseTrack,
 } from "@/store/features/playlistSlice";
+
 const Bar = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const isPlaying = useAppSelector((state) => state.playlist.isPlaying);
@@ -26,11 +27,20 @@ const Bar = () => {
   const handleNextTrack = () => {
     dispatch(setNextTrack());
   };
+
   const handlePrevTrack = () => {
     dispatch(setPrevTrack());
   };
+
   const handleIsShuffle = () => {
     dispatch(setIsShuffle(!isShuffle));
+  };
+
+  const repeatTrack = () => {
+    setIsLoop(!isLoop);
+    if (audioRef.current) {
+      audioRef.current.loop = !isLoop;
+    }
   };
 
   useEffect(() => {
@@ -42,7 +52,21 @@ const Bar = () => {
     setCurrentTime(0);
     currentAudio.currentTime = 0;
     currentAudio.play();
-  }, [currentTrack, dispatch]);
+
+    const handleEnded = () => {
+      if (isShuffle) {
+        handleNextTrack();
+      } else {
+        handleNextTrack();
+      }
+    };
+
+    currentAudio.addEventListener("ended", handleEnded);
+
+    return () => {
+      currentAudio.removeEventListener("ended", handleEnded);
+    };
+  }, [currentTrack, dispatch, isShuffle]);
 
   const handlePlay = () => {
     const audio = audioRef.current;
@@ -55,11 +79,6 @@ const Bar = () => {
       audio.play();
       dispatch(playTrack());
     }
-  };
-
-  const repeatTrack = () => {
-    setIsLoop(!isLoop);
-    audioRef.current!.loop = !isLoop;
   };
 
   function updateTime(e: React.ChangeEvent<HTMLAudioElement>) {
@@ -113,6 +132,7 @@ const Bar = () => {
               handlePrevTrack={handlePrevTrack}
               handleIsShuffle={handleIsShuffle}
               isShuffle={isShuffle}
+              audioRef={audioRef}
             />
             <TrackPlay name={name} author={author} />
           </div>

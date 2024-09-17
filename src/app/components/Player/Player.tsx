@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import styles from "./Player.module.css";
 import classNames from "classnames";
 
@@ -10,6 +11,7 @@ type PlayerProps = {
   handlePrevTrack: () => void;
   handleIsShuffle: () => void;
   isShuffle: boolean;
+  audioRef: React.RefObject<HTMLAudioElement>;
 };
 
 export function Player({
@@ -21,7 +23,23 @@ export function Player({
   handlePrevTrack,
   handleIsShuffle,
   isShuffle,
+  audioRef,
 }: PlayerProps) {
+  useEffect(() => {
+    const audioElement = audioRef.current;
+    if (audioElement) {
+      const handleEnded = () => {
+        handleNextTrack();
+      };
+
+      audioElement.addEventListener("ended", handleEnded);
+
+      return () => {
+        audioElement.removeEventListener("ended", handleEnded);
+      };
+    }
+  }, [audioRef, handleNextTrack]);
+
   return (
     <div className={styles.playerControls}>
       <div className={styles.playerBtnPrev} onClick={handlePrevTrack}>
@@ -32,11 +50,11 @@ export function Player({
       <div className={styles.playerBtnPlay} onClick={handlePlay}>
         {isPlaying ? (
           <svg className={styles.playerBtnPlaySvg}>
-            <use xlinkHref="Image/icon/sprite.svg#icon-pause" />
+            <use xlinkHref="/Image/icon/sprite.svg#icon-pause" />
           </svg>
         ) : (
           <svg className={styles.playerBtnPlaySvg}>
-            <use xlinkHref="Image/icon/sprite.svg#icon-play" />
+            <use xlinkHref="/Image/icon/sprite.svg#icon-play" />
           </svg>
         )}
       </div>
