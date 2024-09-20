@@ -75,7 +75,7 @@ export default function Login() {
               <Link href="">Войти</Link>
             </button>
             <button className={styles.modalBtnSignup}>
-              <Link href={"/signup"}>Зарегистрироваться</Link>
+              <Link href={"/register"}>Зарегистрироваться</Link>
             </button>
           </form>
         </div>

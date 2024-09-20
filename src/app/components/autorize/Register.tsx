@@ -62,7 +62,7 @@ export default function SignupPage() {
             <Link href={"/"}>
               <div className={styles.modalLogo}>
                 <Image
-                  src="/logo_modal.png"
+                  src="/Image/logo_modal.png"
                   alt="logo"
                   width={140}
                   height={21}
@@ -78,7 +78,7 @@ export default function SignupPage() {
               onChange={handleInputChange}
             />
             <input
-              className={styles.modalInput}
+              className={classNames(styles.modalInput, styles.login)}
               type="password"
               name="password"
               placeholder="Пароль"
@@ -86,7 +86,7 @@ export default function SignupPage() {
               onChange={handleInputChange}
             />
             <input
-              className={styles.modalInput}
+              className={classNames(styles.modalInput, styles.login)}
               type="password"
               name="repeat-password"
               placeholder="Подтвердите пароль"
@@ -96,7 +96,7 @@ export default function SignupPage() {
             {error && <div className={styles.Error}>{error}</div>}
             <button
               type={"submit"}
-              className={styles.modalBtnSignup}
+              className={styles.modalBtnEnter}
               onClick={handleRegister}
               disabled={isSubmitting}
             >
