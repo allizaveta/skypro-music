@@ -56,8 +56,6 @@ const playlistSlice = createSlice({
         () => 0.5 - Math.random()
       );
       state.isPlaying = true;
-      console.log(action.payload);
-      console.log(state.shuffledPlaylist);
     },
     setDefaultPlaylist: (state, action: PayloadAction<TrackType[]>) => {
       state.defaultPlaylist = action.payload;
@@ -74,8 +72,6 @@ const playlistSlice = createSlice({
       if (newTrack) {
         state.currentTrack = newTrack;
       }
-      console.log(currentTrackIndex);
-      console.log(newTrack);
     },
     setPrevTrack: (state) => {
       const playlist = state.isShuffle
