@@ -93,6 +93,14 @@
   padding: 5px;
 }
 
+.trackPlayDislikeSvg {
+  width: 14px;
+  height: 12px;
+  margin-left: 25px;
+  fill: #b672ff;
+  stroke: #b672ff;
+}
+
 .trackPlayLikeSvg {
   width: 14px;
   height: 12px;

@@ -1,3 +1,4 @@
+"use client";
 import classNames from "classnames";
 import Link from "next/link";
 import styles from "./autorize.module.css";
@@ -5,11 +6,11 @@ import Image from "next/image";
 import { useState, ChangeEvent } from "react";
 import { useAppDispatch } from "@/hooks";
 import { getTokens, getUser } from "@/store/features/authSlice";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   const router = useRouter();
-  const [error, setError] = useState(null || String);
+  const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState({ email: "", password: "" });
   const dispatch = useAppDispatch();
 
@@ -46,7 +47,7 @@ export default function Login() {
             <Link href={"/"}>
               <div className={styles.modalLogo}>
                 <Image
-                  src="/logo_modal.png"
+                  src="/Image/logo_modal.png"
                   alt="logo"
                   width={140}
                   height={21}
