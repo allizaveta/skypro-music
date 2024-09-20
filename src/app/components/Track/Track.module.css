@@ -94,6 +94,13 @@
   fill: transparent;
   stroke: #696969;
 }
+.trackTimeSvgDislike {
+  width: 14px;
+  height: 12px;
+  margin-right: 17px;
+  fill: #b672ff;
+  stroke: #b672ff;
+}
 
 .trackTimeText {
   font-style: normal;

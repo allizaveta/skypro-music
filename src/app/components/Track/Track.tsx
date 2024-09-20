@@ -63,12 +63,12 @@ const Track = ({ track, tracks }: TrackProps) => {
         </div>
         <div className="track__time" onClick={handleLike}>
           {isLiked ? (
-            <svg className={styles.trackTimeSvg}>
+            <svg className={styles.trackTimeSvgDislike}>
               <use xlinkHref="Image/icon/sprite.svg#icon-like" />
             </svg>
           ) : (
             <svg className={styles.trackTimeSvg}>
-              <use xlinkHref="Image/icon/sprite.svg#icon-dislike" />
+              <use xlinkHref="Image/icon/sprite.svg#icon-like" />
             </svg>
           )}
           <span className={styles.trackTimeText}>
