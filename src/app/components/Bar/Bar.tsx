@@ -8,7 +8,7 @@ import ProgressBar from "./ProgressBar/ProgressBar";
 import { playTime } from "@/utils/playTime";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import {
-  setIsShuffle,
+  setIsShuffled,
   setNextTrack,
   setPrevTrack,
   playTrack,
@@ -19,10 +19,12 @@ const Bar = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const isPlaying = useAppSelector((state) => state.playlist.isPlaying);
   const [isLoop, setIsLoop] = useState<boolean>(false);
-  const [currentTime, setCurrentTime] = useState<number>(0);
   const currentTrack = useAppSelector((state) => state.playlist.currentTrack);
   const isShuffle = useAppSelector((state) => state.playlist.isShuffle);
+  const [currentTime, setCurrentTime] = useState(0);
   const dispatch = useAppDispatch();
+
+  const audio = audioRef.current;
 
   const handleNextTrack = () => {
     dispatch(setNextTrack());
@@ -33,7 +35,7 @@ const Bar = () => {
   };
 
   const handleIsShuffle = () => {
-    dispatch(setIsShuffle(!isShuffle));
+    dispatch(setIsShuffled(!isShuffle));
   };
 
   const repeatTrack = () => {
@@ -42,31 +44,7 @@ const Bar = () => {
       audioRef.current.loop = !isLoop;
     }
   };
-
-  useEffect(() => {
-    const currentAudio = audioRef.current;
-    if (!currentTrack || !currentAudio) {
-      return;
-    }
-    dispatch(playTrack());
-    setCurrentTime(0);
-    currentAudio.currentTime = 0;
-    currentAudio.play();
-
-    const handleEnded = () => {
-      if (isShuffle) {
-        handleNextTrack();
-      } else {
-        handleNextTrack();
-      }
-    };
-
-    currentAudio.addEventListener("ended", handleEnded);
-
-    return () => {
-      currentAudio.removeEventListener("ended", handleEnded);
-    };
-  }, [currentTrack, dispatch, isShuffle]);
+  audio ? (audio.loop = isLoop) : null;
 
   const handlePlay = () => {
     const audio = audioRef.current;

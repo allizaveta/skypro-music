@@ -3,6 +3,7 @@ import styles from "./Track.module.css";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { setCurrentTrack } from "@/store/features/playlistSlice";
 import classNames from "classnames";
+import useLikeTrack from "@/utils/useLikeTrack";
 
 type TrackProps = {
   track: TrackType;
@@ -14,6 +15,7 @@ const Track = ({ track, tracks }: TrackProps) => {
   const isPlaying = useAppSelector((state) => state.playlist.isPlaying);
   const { name, author, album, duration_in_seconds, _id } = track;
   const dispatch = useAppDispatch();
+  const { isLiked, handleLike } = useLikeTrack(track._id);
 
   const handleTrackClick = () => {
     dispatch(setCurrentTrack({ track, tracks }));
@@ -59,10 +61,16 @@ const Track = ({ track, tracks }: TrackProps) => {
         <div className={styles.trackAlbum}>
           <span className={styles.trackAlbumLink}>{album}</span>
         </div>
-        <div className="track__time">
-          <svg className={styles.trackTimeSvg}>
-            <use xlinkHref="Image/icon/sprite.svg#icon-like" />
-          </svg>
+        <div className="track__time" onClick={handleLike}>
+          {isLiked ? (
+            <svg className={styles.trackTimeSvg}>
+              <use xlinkHref="Image/icon/sprite.svg#icon-like" />
+            </svg>
+          ) : (
+            <svg className={styles.trackTimeSvg}>
+              <use xlinkHref="Image/icon/sprite.svg#icon-dislike" />
+            </svg>
+          )}
           <span className={styles.trackTimeText}>
             {formatDuration(duration_in_seconds)}
           </span>

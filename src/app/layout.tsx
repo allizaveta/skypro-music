@@ -3,7 +3,12 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import ReduxProvider from "@/store/ReduxProvider";
 
-const montserrat = Montserrat({ subsets: ["cyrillic"] });
+const montserrat = Montserrat({
+  weight: ["300", "400", "500", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  fallback: ["Arial", "sans-serif"],
+});
 
 export const metadata: Metadata = {
   title: "Skypro music",

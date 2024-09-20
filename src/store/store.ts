@@ -1,12 +1,14 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { authReducer } from "./features/authSlice";
 import { playlistReducer } from "./features/playlistSlice";
 
 // Функция makeStore создает и возвращает хранилище Redux с помощью функции configureStore.
 export const makeStore = () => {
   return configureStore({
-    // Мы передаем объект, в котором свойство reducer содержит корневой редьюсер, объединяющий все редьюсеры нашего приложения.
+    // Мы передаем объект, в котором свойство reducer содержит корневой редюсер, объединяющий все редюсеры нашего приложения.
     reducer: combineReducers({
       playlist: playlistReducer,
+      auth: authReducer,
     }),
   });
 };
