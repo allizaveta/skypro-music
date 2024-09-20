@@ -1,12 +1,31 @@
+"use client";
 import Image from "next/image";
 import styles from "./Sidebar.module.css";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { useRouter } from "next/navigation";
+import { quitUser } from "@/store/features/authSlice";
 
 const Sidebar = () => {
+  const user = useAppSelector((state) => state.auth.user);
+
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const handleLogoutClick = () => {
+    if (user) {
+      dispatch(quitUser());
+    } else {
+      router.push("/login");
+    }
+  };
   return (
     <div className={styles.mainSidebar}>
       <div className={styles.sidebarPersonal}>
-        <p className={styles.sidebarPersonalName}>Sergey.Ivanov</p>
-        <div className={styles.sidebarIcon}>
+        <p className={styles.sidebarPersonalName}>
+          {" "}
+          {user ? user.username : ""}
+        </p>
+        <div className={styles.sidebarIcon} onClick={handleLogoutClick}>
           <svg>
             <use xlinkHref="Image/icon/sprite.svg#icon-logout" />
           </svg>

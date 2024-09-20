@@ -37,7 +37,7 @@ export default function SignupPage() {
     } else {
       try {
         await RegistrationApi({ email, password });
-        navigate.push("/signin");
+        navigate.push("/login");
       } catch (error) {
         if (error instanceof Error) setError(error.message);
       } finally {

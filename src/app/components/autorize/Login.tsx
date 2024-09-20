@@ -16,13 +16,12 @@ export default function Login() {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prevFormData) => {
-      return {
-        ...prevFormData,
-        [name]: value,
-      };
-    });
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
   };
+
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
@@ -39,6 +38,7 @@ export default function Login() {
       }
     }
   };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.containerEnter}>
@@ -72,7 +72,7 @@ export default function Login() {
             />
             {error && <div className={styles.Error}>{error}</div>}
             <button onClick={handleSubmit} className={styles.modalBtnEnter}>
-              <Link href="">Войти</Link>
+              Войти
             </button>
             <button className={styles.modalBtnSignup}>
               <Link href={"/register"}>Зарегистрироваться</Link>

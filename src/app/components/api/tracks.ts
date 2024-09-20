@@ -1,11 +1,11 @@
 import { SinginFormType } from "@/types/user";
 import { fetchWithAuth } from "@/utils/fetchWhithAuth";
 
-export const API_URL = "https://webdev-music-003b5b991590.herokuapp.com";
+export const API_URL = "https://webdev-music-003b5b991590.herokuapp.com/";
 
 export const getTracks = async () => {
   try {
-    const res = await fetch(API_URL + `/catalog/track/all/`);
+    const res = await fetch(API_URL + `catalog/track/all/`);
     if (!res.ok) {
       throw new Error("Ошибка при получении треков");
     }
