@@ -3,7 +3,7 @@ import { Player } from "../Player/Player";
 import { TrackPlay } from "../TrackPlay/TrackPlay";
 import { Volume } from "../Volume/Volume";
 import styles from "./Bar.module.css";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import ProgressBar from "./ProgressBar/ProgressBar";
 import { playTime } from "@/utils/playTime";
 import { useAppDispatch, useAppSelector } from "@/hooks";
