@@ -89,14 +89,14 @@
   margin-left: 26%;
 }
 
-.trackPlayLike,
-.trackPlayDislike {
+.trackPlayLike {
   padding: 5px;
 }
 
 .trackPlayLikeSvg {
   width: 14px;
   height: 12px;
+  margin-left: 25px;
   fill: transparent;
   stroke: #696969;
 }
@@ -118,15 +118,4 @@
   fill: #696969;
   stroke: #ffffff;
   cursor: pointer;
-}
-
-.trackPlayDislike {
-  margin-left: 28.5px;
-}
-
-.trackPlayDislikeSvg {
-  width: 14.34px;
-  height: 13px;
-  fill: transparent;
-  stroke: #696969;
 }
