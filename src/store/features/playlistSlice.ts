@@ -31,8 +31,8 @@ const initialState: PlaylistStateType = {
   defaultPlaylist: [],
   currentTrack: null,
   currentPlaylist: [],
-  shuffledPlaylist: [],
   favoriteTracksList: [],
+  shuffledPlaylist: [],
   isPlaying: false,
   isLoop: false,
   isShuffle: false,
@@ -113,41 +113,6 @@ const playlistSlice = createSlice({
         (id) => id !== trackId
       );
     },
-
-    setFilters: (
-      state,
-      action: PayloadAction<{
-        author?: string[];
-        genre?: string[];
-        searchValue?: string;
-      }>
-    ) => {
-      state.filterOptions = {
-        author: action.payload.author || state.filterOptions.author,
-        genre: action.payload.genre || state.filterOptions.genre,
-        searchValue:
-          action.payload.searchValue || state.filterOptions.searchValue,
-      };
-
-      state.filteredTracks = state.defaultPlaylist.filter((t) => {
-        const hasAuthors = state.filterOptions.author.length !== 0;
-        const isAuthors = hasAuthors
-          ? state.filterOptions.author.includes(t.author)
-          : true;
-        const hasGenres = state.filterOptions.genre.length !== 0;
-        const isGenres = hasGenres
-          ? state.filterOptions.genre.includes(t.genre)
-          : true;
-        const hasSearchValue = t.name
-          .toLowerCase()
-          .includes(state.filterOptions.searchValue.toLowerCase());
-        if (hasAuthors) {
-          return isAuthors && hasSearchValue;
-        } else {
-          return isGenres && hasSearchValue;
-        }
-      });
-    },
   },
   extraReducers(builder) {
     builder.addCase(getFavoriteTracks.fulfilled, (state, action) => {
@@ -167,7 +132,6 @@ export const {
 
   setIsLoop,
   setIsShuffled,
-  setFilters,
   setLikeTrack,
   setDisLikeTrack,
 } = playlistSlice.actions;
