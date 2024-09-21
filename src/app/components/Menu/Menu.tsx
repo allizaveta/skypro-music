@@ -1,11 +1,11 @@
 import Link from "next/link";
 import styles from "./Menu.module.css";
 import { quitUser } from "@/store/features/authSlice";
-import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/store";
 
 const Menu = () => {
   const dispatch = useAppDispatch();
-  const tokens = useAppSelector((state) => state.auth.tokens);
+  const tokens = useAppSelector((state) => state.user.tokens);
 
   const isLogin = !!tokens.access;
 

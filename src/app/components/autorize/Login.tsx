@@ -4,7 +4,7 @@ import Link from "next/link";
 import styles from "./autorize.module.css";
 import Image from "next/image";
 import { useState, ChangeEvent } from "react";
-import { useAppDispatch } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/store";
 import { getTokens, getUser } from "@/store/features/authSlice";
 import { useRouter } from "next/navigation";
 

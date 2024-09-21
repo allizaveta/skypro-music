@@ -100,56 +100,40 @@ export const fetchTokens = async ({ email, password }: SinginFormType) => {
     throw new Error("Ошибка" + error);
   }
 };
-export async function likeTrack({
-  trackId,
-  access,
-  refresh,
-}: {
-  trackId: number;
-  access: string;
-  refresh: string;
-}) {
-  try {
-    const res = await fetchWithAuth(
-      API_URL + `catalog/track/${trackId}/favorite/`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${access}`,
-        },
+
+export async function likeTrack(token: string, id: number) {
+  const response = await fetch(
+    `https://webdev-music-003b5b991590.herokuapp.com/catalog/track/${id}/favorite/`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
       },
-      refresh
-    );
-    return res.json();
-  } catch (error) {
-    throw new Error("Ошибка" + error);
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Ошибка сервера");
   }
+
+  const data = await response.json();
+  return data.data;
 }
 
-export async function dislikeTrack({
-  trackId,
-  access,
-  refresh,
-}: {
-  trackId: number;
-  access: string;
-  refresh: string;
-}) {
-  try {
-    const res = await fetchWithAuth(
-      API_URL + `catalog/track/${trackId}/favorite/`,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${access}`,
-        },
-      },
-      refresh
-    );
-    return res.json();
-  } catch (error) {
-    throw new Error("Ошибка" + error);
+export async function dislikeTrack(token: string, id: number) {
+  const response = await fetch(`${API_URL}/catalog/track/${id}/favorite/`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Ошибка сервера");
   }
+
+  const data = await response.json();
+  return data.data;
 }
 
 export async function fetchFavoriteTracks({

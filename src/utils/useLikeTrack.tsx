@@ -1,11 +1,11 @@
 import { dislikeTrack, likeTrack } from "@/app/components/api/tracks";
-import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/store";
 import { setDisLikeTrack, setLikeTrack } from "@/store/features/playlistSlice";
 
 const useLikeTrack = (trackId: number) => {
   const dispatch = useAppDispatch();
 
-  const tokens = useAppSelector((state) => state.auth.tokens);
+  const tokens = useAppSelector((state) => state.user.tokens);
 
   const likedTracks = useAppSelector(
     (state) => state.playlist.favoriteTracksList

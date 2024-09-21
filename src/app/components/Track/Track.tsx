@@ -1,6 +1,6 @@
 import { TrackType } from "@/types/tracks";
 import styles from "./Track.module.css";
-import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/store";
 import { setCurrentTrack } from "@/store/features/playlistSlice";
 import classNames from "classnames";
 import useLikeTrack from "@/utils/useLikeTrack";

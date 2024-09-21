@@ -1,12 +1,12 @@
 "use client";
 import Image from "next/image";
 import styles from "./Sidebar.module.css";
-import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/store";
 import { useRouter } from "next/navigation";
 import { quitUser } from "@/store/features/authSlice";
 
 const Sidebar = () => {
-  const user = useAppSelector((state) => state.auth.user);
+  const user = useAppSelector((state) => state.user.user);
 
   const dispatch = useAppDispatch();
   const router = useRouter();
