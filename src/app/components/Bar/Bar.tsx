@@ -56,13 +56,11 @@ const Bar = () => {
     if (isPlaying) {
       audioElement.pause();
       dispatch(setIsPlaying(false));
-      console.log("pause");
     } else {
       audioElement
         .play()
         .then(() => {
           dispatch(setIsPlaying(true));
-          console.log("Play");
         })
         .catch((error) => {
           console.log("Error occurred while trying to play the track:", error);

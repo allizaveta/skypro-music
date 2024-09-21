@@ -7,6 +7,7 @@ import {
   useStore,
 } from "react-redux";
 import { playlistReducer } from "./features/playlistSlice";
+import { filterReducer } from "./features/filterSlice";
 import { authReducer } from "./features/authSlice";
 
 export const makeStore = () => {
@@ -14,6 +15,7 @@ export const makeStore = () => {
     reducer: combineReducers({
       playlist: playlistReducer,
       user: authReducer,
+      filters: filterReducer,
     }),
   });
 };
