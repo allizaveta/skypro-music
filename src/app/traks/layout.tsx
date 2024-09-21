@@ -1,5 +1,3 @@
-"use client";
-
 import styles from "./page.module.css";
 import { useEffect } from "react";
 import { useAppDispatch } from "../../store/store";
