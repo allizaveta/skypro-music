@@ -107,7 +107,7 @@ export function Player({ track, togglePlay, handleLoop }: PlayerProps) {
           </svg>
         </div>
       </div>
-      <div className={styles.trackPlay}>
+      <div className={styles.playerTrackPlay}>
         <div className={styles.trackPlayContain}>
           <div className={styles.trackPlayImage}>
             <svg className={styles.trackPlaySvg}>

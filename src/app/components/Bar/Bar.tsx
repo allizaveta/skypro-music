@@ -1,6 +1,5 @@
 "use client";
 import { Player } from "../Player/Player";
-import { TrackPlay } from "../TrackPlay/TrackPlay";
 import { Volume } from "../Volume/Volume";
 import styles from "./Bar.module.css";
 import { useEffect, useRef, useState } from "react";
