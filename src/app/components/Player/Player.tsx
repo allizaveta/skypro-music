@@ -1,4 +1,5 @@
-import { useEffect, useRef } from "react";
+"use client";
+import { useEffect } from "react";
 import styles from "./Player.module.css";
 import classNames from "classnames";
 

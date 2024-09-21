@@ -6,14 +6,13 @@ import styles from "./Bar.module.css";
 import { useRef, useState } from "react";
 import ProgressBar from "./ProgressBar/ProgressBar";
 import { playTime } from "@/utils/playTime";
-import { useAppDispatch, useAppSelector } from "@/store/store";
 import {
   setIsShuffled,
   setNextTrack,
   setPrevTrack,
-  playTrack,
-  pauseTrack,
+  setIsPlaying,
 } from "@/store/features/playlistSlice";
+import { useAppDispatch, useAppSelector } from "@/store/store";
 
 const Bar = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -47,15 +46,27 @@ const Bar = () => {
   audio ? (audio.loop = isLoop) : null;
 
   const handlePlay = () => {
-    const audio = audioRef.current;
-    if (!audio) return;
+    const audioElement = audioRef.current;
+
+    if (!audioElement) {
+      console.log("Audio element is not available.");
+      return;
+    }
 
     if (isPlaying) {
-      audio.pause();
-      dispatch(pauseTrack());
+      audioElement.pause();
+      dispatch(setIsPlaying(false));
+      console.log("pause");
     } else {
-      audio.play();
-      dispatch(playTrack());
+      audioElement
+        .play()
+        .then(() => {
+          dispatch(setIsPlaying(true));
+          console.log("Play");
+        })
+        .catch((error) => {
+          console.log("Error occurred while trying to play the track:", error);
+        });
     }
   };
 
