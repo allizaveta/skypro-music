@@ -176,7 +176,9 @@ export const refreshToken = async (refresh: string) => {
 
 export async function fetchSelectionTracks(id: string) {
   const fullId = Number(id) + 1;
-  const response = await fetch(`${API_URL}catalog/selection/${fullId}/`);
+  const response = await fetch(
+    `https://webdev-music-003b5b991590.herokuapp.com/catalog/selection/${fullId}/`
+  );
 
   if (!response.ok) {
     throw new Error("Ошибка получения");

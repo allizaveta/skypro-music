@@ -3,98 +3,119 @@ import { Player } from "../Player/Player";
 import { TrackPlay } from "../TrackPlay/TrackPlay";
 import { Volume } from "../Volume/Volume";
 import styles from "./Bar.module.css";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ProgressBar from "./ProgressBar/ProgressBar";
 import { playTime } from "@/utils/playTime";
 import {
-  setIsShuffled,
-  setNextTrack,
-  setPrevTrack,
   setIsPlaying,
+  setNextTrack,
+  setIsLoop,
 } from "@/store/features/playlistSlice";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 
 const Bar = () => {
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const isPlaying = useAppSelector((state) => state.playlist.isPlaying);
-  const [isLoop, setIsLoop] = useState<boolean>(false);
-  const currentTrack = useAppSelector((state) => state.playlist.currentTrack);
-  const isShuffle = useAppSelector((state) => state.playlist.isShuffle);
-  const [currentTime, setCurrentTime] = useState(0);
   const dispatch = useAppDispatch();
 
-  const audio = audioRef.current;
+  const [currentTime, setCurrentTime] = useState<number>(0);
+  const [volume, setVolume] = useState<number>(0.5);
 
-  const handleNextTrack = () => {
-    dispatch(setNextTrack());
-  };
+  const audioRef = useRef<HTMLAudioElement>(null);
 
-  const handlePrevTrack = () => {
-    dispatch(setPrevTrack());
-  };
+  const duration = audioRef.current?.duration || 0;
 
-  const handleIsShuffle = () => {
-    dispatch(setIsShuffled(!isShuffle));
-  };
+  const {
+    currentTrack: track,
+    isPlaying,
+    isLoop,
+  } = useAppSelector((state) => state.playlist);
 
-  const repeatTrack = () => {
-    setIsLoop(!isLoop);
+  useEffect(() => {
+    const audio = audioRef.current;
+
+    if (audio) {
+      if (track) {
+        audio.src = track.track_file;
+        audio.play();
+        dispatch(setIsPlaying(true));
+      }
+    }
+  }, [track, dispatch]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+
+    if (audio) {
+      audio.volume = volume;
+    }
+  }, [volume]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+
+    const handleEnded = () => {
+      dispatch(setNextTrack());
+    };
+
+    if (audio) {
+      audio.addEventListener("ended", handleEnded);
+    }
+
+    return () => {
+      if (audio) {
+        audio.removeEventListener("ended", handleEnded);
+      }
+    };
+  }, [track, dispatch]);
+
+  useEffect(() => {
     if (audioRef.current) {
-      audioRef.current.loop = !isLoop;
+      if (isPlaying) {
+        audioRef.current.play();
+      } else {
+        audioRef.current.pause();
+      }
     }
-  };
-  audio ? (audio.loop = isLoop) : null;
+  }, [isPlaying]);
 
-  const handlePlay = () => {
-    const audioElement = audioRef.current;
-
-    if (!audioElement) {
-      console.log("Audio element is not available.");
-      return;
-    }
-
-    if (isPlaying) {
-      audioElement.pause();
-      dispatch(setIsPlaying(false));
-    } else {
-      audioElement
-        .play()
-        .then(() => {
-          dispatch(setIsPlaying(true));
-        })
-        .catch((error) => {
-          console.log("Error occurred while trying to play the track:", error);
-        });
-    }
-  };
-
-  function updateTime(e: React.ChangeEvent<HTMLAudioElement>) {
-    setCurrentTime(e.currentTarget.currentTime);
-  }
-
-  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (audioRef.current) {
-      audioRef.current.currentTime = Number(e.target.value);
-    }
-  };
-
-  if (!currentTrack) {
+  if (!track) {
     return null;
   }
 
-  const { name, author, track_file } = currentTrack;
-  const duration = audioRef.current?.duration || 0;
+  function togglePlay() {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+        dispatch(setIsPlaying(false));
+      } else {
+        audioRef.current.play();
+        dispatch(setIsPlaying(true));
+      }
+    }
+  }
+
+  function handleSeek(event: React.ChangeEvent<HTMLInputElement>) {
+    if (audioRef.current) {
+      audioRef.current.currentTime = Number(event.target.value);
+    }
+  }
+
+  function handleLoop() {
+    if (audioRef.current) {
+      audioRef.current.loop = !isLoop;
+      dispatch(setIsLoop(!isLoop));
+    }
+  }
 
   return (
     <div className={styles.bar}>
       <div className={styles.barContent}>
         <audio
-          className={styles.audio}
           ref={audioRef}
-          controls
-          src={track_file}
-          onTimeUpdate={updateTime}
-        ></audio>
+          src={track?.track_file}
+          onTimeUpdate={(e) => {
+            setCurrentTime(e.currentTarget.currentTime);
+          }}
+        />
         <ProgressBar
           max={duration}
           value={currentTime}
@@ -111,19 +132,15 @@ const Bar = () => {
         <div className={styles.barPlayerBlock}>
           <div className={styles.barPlayer}>
             <Player
-              handlePlay={handlePlay}
-              isPlaying={isPlaying}
-              repeatTrack={repeatTrack}
-              isLoop={isLoop}
-              handleNextTrack={handleNextTrack}
-              handlePrevTrack={handlePrevTrack}
-              handleIsShuffle={handleIsShuffle}
-              isShuffle={isShuffle}
-              audioRef={audioRef}
+              track={track}
+              togglePlay={togglePlay}
+              handleLoop={handleLoop}
             />
-            <TrackPlay name={name} author={author} />
           </div>
-          <Volume audioRef={audioRef} />
+          <Volume
+            value={volume}
+            onChange={(e) => setVolume(Number(e.target.value))}
+          />
         </div>
       </div>
     </div>

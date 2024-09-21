@@ -1,15 +1,13 @@
 import { TrackType } from "@/types/tracks";
 import { dislikeTrack, likeTrack } from "@/app/components/api/tracks";
-import { setDisLikeTrack, setLikeTrack } from "@/store/features/playlistSlice";
+import { setDislike, setLike } from "@/store/features/playlistSlice";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 
 export function useLikeTrack(track: TrackType) {
   const dispatch = useAppDispatch();
   const tokens = useAppSelector((state) => state.user.tokens);
   const user = useAppSelector((state) => state.user.user);
-  const likedTracks = useAppSelector(
-    (state) => state.playlist.favoriteTracksList
-  );
+  const likedTracks = useAppSelector((state) => state.playlist.likedTracks);
 
   const isLiked = !!likedTracks.find((t) => t._id === track._id);
 
@@ -22,7 +20,7 @@ export function useLikeTrack(track: TrackType) {
     }
 
     const fetchAction = isLiked ? dislikeTrack : likeTrack;
-    const storeAction = isLiked ? setDisLikeTrack : setLikeTrack;
+    const storeAction = isLiked ? setDislike : setLike;
 
     try {
       await fetchAction(tokens.access, track._id);

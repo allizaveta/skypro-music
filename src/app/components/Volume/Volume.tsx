@@ -4,17 +4,11 @@ import { RefObject, useEffect, useRef, useState } from "react";
 import { useCurrentTrack } from "@/contexts/CurrentTrackProvider";
 
 type VolumeProps = {
-  audioRef: RefObject<HTMLAudioElement>;
+  value: number;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export function Volume({ audioRef }: VolumeProps) {
-  const [volume, setVolume] = useState<number>(1);
-
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = volume;
-    }
-  }, [volume, audioRef]);
+export function Volume({ value, onChange }: VolumeProps) {
   return (
     <div className={styles.barVolumeBlock}>
       <div className={styles.volumeContent}>
@@ -31,8 +25,8 @@ export function Volume({ audioRef }: VolumeProps) {
             min="0"
             max="1"
             step="0.01"
-            value={volume}
-            onChange={(e) => setVolume(Number(e.target.value))}
+            value={value}
+            onChange={onChange}
           />
         </div>
       </div>

@@ -5,9 +5,7 @@ import { useRouter } from "next/navigation";
 import { Centerblock } from "../components/Centerblock/Centerblock";
 
 export default function FavoritePage() {
-  const favoriteTracks = useAppSelector(
-    (state) => state.playlist.favoriteTracksList
-  );
+  const favoriteTracks = useAppSelector((state) => state.playlist.likedTracks);
   const { user } = useAppSelector((state) => state.user);
   const filteredTracks = useFilteredTracks(favoriteTracks);
 

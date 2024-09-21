@@ -1,9 +1,11 @@
 import { TrackType } from "@/types/tracks";
 import styles from "./Track.module.css";
 import { useAppDispatch, useAppSelector } from "@/store/store";
-import { setCurrentTrack, setIsPlaying } from "@/store/features/playlistSlice";
+import { setCurrentTrack } from "@/store/features/playlistSlice";
 import classNames from "classnames";
-import useLikeTrack from "@/utils/useLikeTrack";
+import { useLikeTrack } from "@/hooks/useLikeTrack";
+import { useState } from "react";
+import { formatTime } from "@/utils/formatTime";
 
 type TrackProps = {
   track: TrackType;
@@ -11,42 +13,39 @@ type TrackProps = {
 };
 
 const Track = ({ track, tracks }: TrackProps) => {
-  const currentTrack = useAppSelector((state) => state.playlist.currentTrack);
-  const isPlaying = useAppSelector((state) => state.playlist.isPlaying);
-  const { name, author, album, duration_in_seconds, _id } = track;
   const dispatch = useAppDispatch();
-  const { isLiked, handleLike } = useLikeTrack(track._id);
+  const { currentTrack, isPlaying } = useAppSelector((state) => state.playlist);
+  const { isLiked, handleLike } = useLikeTrack(track);
 
-  const handleTrackClick = () => {
-    dispatch(setCurrentTrack({ track, tracks }));
+  const { name, author, album, duration_in_seconds } = track;
+  const conditionCurrentTrack = currentTrack?._id === track._id;
+
+  const [animateLike, setAnimateLike] = useState(false);
+
+  const handleSelectTrack = () => {
+    dispatch(setCurrentTrack({ currentTrack: track, playlist: tracks }));
   };
 
-  const formatDuration = (seconds: number): string => {
-    const minutes = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${String(minutes).padStart(2, "0")}:${String(secs).padStart(
-      2,
-      "0"
-    )}`;
+  const handleLikeClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    setAnimateLike(true);
+    handleLike(event);
+
+    setTimeout(() => {
+      setAnimateLike(false);
+    }, 300);
   };
 
   return (
-    <div onClick={handleTrackClick} className={styles.playlistItem}>
+    <div onClick={handleSelectTrack} className={styles.playlistItem}>
       <div className={styles.playlistTrack}>
         <div className={styles.trackTitle}>
           <div className={styles.trackTitleImage}>
-            {currentTrack?._id === _id ? (
-              <svg
-                className={classNames(styles.playingTrack, {
-                  [styles.active]: currentTrack?._id === _id && isPlaying,
+            {conditionCurrentTrack && (
+              <div
+                className={classNames(styles.blinkedMark, {
+                  [styles.active]: isPlaying,
                 })}
-              >
-                <use xlinkHref="Image/icon/sprite.svg#icon-playingTrack"></use>
-              </svg>
-            ) : (
-              <svg className={styles.trackTitleSvg}>
-                <use xlinkHref="Image/icon/sprite.svg#icon-note" />
-              </svg>
+              ></div>
             )}
           </div>
           <div className="track__title-text">
@@ -72,7 +71,7 @@ const Track = ({ track, tracks }: TrackProps) => {
             </svg>
           )}
           <span className={styles.trackTimeText}>
-            {formatDuration(duration_in_seconds)}
+            {formatTime(duration_in_seconds)}
           </span>
         </div>
       </div>
