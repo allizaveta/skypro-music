@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import styles from "./Sidebar.module.css";
-import { useAppDispatch, useAppSelector } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
 import { useRouter } from "next/navigation";
 import { quitUser } from "@/store/features/authSlice";
 

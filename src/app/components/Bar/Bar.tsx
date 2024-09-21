@@ -6,7 +6,7 @@ import styles from "./Bar.module.css";
 import { useRef, useState } from "react";
 import ProgressBar from "./ProgressBar/ProgressBar";
 import { playTime } from "@/utils/playTime";
-import { useAppDispatch, useAppSelector } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
 import {
   setIsShuffled,
   setNextTrack,

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styles from "./Menu.module.css";
-import { useAppDispatch, useAppSelector } from "@/hooks";
 import { quitUser } from "@/store/features/authSlice";
+import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
 
 const Menu = () => {
   const dispatch = useAppDispatch();

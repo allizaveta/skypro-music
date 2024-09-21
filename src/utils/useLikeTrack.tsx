@@ -1,5 +1,5 @@
 import { dislikeTrack, likeTrack } from "@/app/components/api/tracks";
-import { useAppDispatch, useAppSelector } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
 import { setDisLikeTrack, setLikeTrack } from "@/store/features/playlistSlice";
 
 const useLikeTrack = (trackId: number) => {
