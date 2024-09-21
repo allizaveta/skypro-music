@@ -14,7 +14,7 @@ export default function FavoritePage() {
   const router = useRouter();
 
   if (!user) {
-    router.push("/signin");
+    router.push("/login");
   }
 
   return <Centerblock tracks={filteredTracks} title={"Мои треки"} />;

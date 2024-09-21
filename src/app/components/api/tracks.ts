@@ -173,3 +173,15 @@ export const refreshToken = async (refresh: string) => {
     throw new Error("Ошибка" + error);
   }
 };
+
+export async function fetchSelectionTracks(id: string) {
+  const fullId = Number(id) + 1;
+  const response = await fetch(`${API_URL}catalog/selection/${fullId}/`);
+
+  if (!response.ok) {
+    throw new Error("Ошибка получения");
+  }
+
+  const data = await response.json();
+  return data.data;
+}
