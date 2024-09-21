@@ -128,19 +128,18 @@ export function Player({ track, togglePlay, handleLoop }: PlayerProps) {
 
         <div className={styles.trackPlayLikeDis}>
           <div
-            className={classNames(styles.trackPlayLike, styles.btnIcon, {
-              [styles.liked]: isLiked && animateLike,
-              [styles.disliked]: !isLiked && animateLike,
-            })}
+            className={classNames(styles.trackPlayDislikeSvg, styles.btnIcon)}
             onClick={handleLikeClick}
           >
-            <svg className={styles.trackPlayLikeSvg}>
-              <use
-                href={`/img/icon/sprite.svg#icon-${
-                  isLiked ? "like" : "dislike"
-                }`}
-              ></use>
-            </svg>
+            {isLiked ? (
+              <svg className={styles.trackPlayDislikeSvg}>
+                <use xlinkHref="Image/icon/sprite.svg#icon-like" />
+              </svg>
+            ) : (
+              <svg className={styles.trackPlayLike}>
+                <use xlinkHref="Image/icon/sprite.svg#icon-like" />
+              </svg>
+            )}
           </div>
         </div>
       </div>
