@@ -40,12 +40,18 @@ const Track = ({ track, tracks }: TrackProps) => {
       <div className={styles.playlistTrack}>
         <div className={styles.trackTitle}>
           <div className={styles.trackTitleImage}>
-            {conditionCurrentTrack && (
-              <div
-                className={classNames(styles.blinkedMark, {
+            {conditionCurrentTrack ? (
+              <svg
+                className={classNames(styles.playingTrack, {
                   [styles.active]: isPlaying,
                 })}
-              ></div>
+              >
+                <use xlinkHref="Image/icon/sprite.svg#icon-playingTrack"></use>
+              </svg>
+            ) : (
+              <svg className={styles.trackTitleSvg}>
+                <use xlinkHref="Image/icon/sprite.svg#icon-note" />
+              </svg>
             )}
           </div>
           <div className="track__title-text">
@@ -60,7 +66,7 @@ const Track = ({ track, tracks }: TrackProps) => {
         <div className={styles.trackAlbum}>
           <span className={styles.trackAlbumLink}>{album}</span>
         </div>
-        <div className="track__time" onClick={handleLike}>
+        <div className="track__time" onClick={handleLikeClick}>
           {isLiked ? (
             <svg className={styles.trackTimeSvgDislike}>
               <use xlinkHref="Image/icon/sprite.svg#icon-like" />

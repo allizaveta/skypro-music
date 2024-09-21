@@ -123,22 +123,6 @@
   animation: bubble_out 0.6s ease-in-out infinite both;
 }
 
-.blinkedMark {
-  position: relative;
-  left: -50px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background-color: #b672ff;
-}
-
-.active {
-  animation-name: pulse;
-  animation-iteration-count: infinite;
-  animation-timing-function: cubic-bezier(0.66, 0, 0, 1);
-  animation-duration: 1s;
-}
-
 @keyframes bubble_out {
   0%,
   to {
