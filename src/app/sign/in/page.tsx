@@ -64,12 +64,26 @@ export default function LoginPage() {
       return;
     }
 
-    await dispatch(signIn(formData));
+    const result = await dispatch(signIn(formData));
+
+    if (signIn.rejected.match(result)) {
+      dispatch(
+        publicError({
+          endpoint: "",
+          status: 401,
+          message: "Введены неверные данные. Проверьте E-mail и пароль.",
+        })
+      );
+      return;
+    }
+
     await dispatch(getTokens(formData));
 
-    if (!UserAPI.error.message) router.push("/");
-
-    dispatch(publicError(UserAPI.error));
+    if (!UserAPI.error.message) {
+      router.push("/");
+    } else {
+      dispatch(publicError(UserAPI.error));
+    }
   }
 
   function handleRedirectToSigningUp(
@@ -79,7 +93,6 @@ export default function LoginPage() {
 
     router.push("./up");
   }
-
   return (
     <>
       <input
