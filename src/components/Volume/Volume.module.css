@@ -1,24 +1,100 @@
-.volume {
+.barVolumeBlock {
   width: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   align-items: center;
   padding: 0 92px 0 0;
 }
 
 .volumeContent {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: end;
 }
 
 .volumeImage {
-  width: 16px;
+  width: 13px;
   height: 18px;
   margin-right: 17px;
+}
+
+.volumeSvg {
+  width: 13px;
+  height: 18px;
   fill: transparent;
 }
 
+/* Стили для ползунка громкости */
 .volumeProgress {
   width: 109px;
+  position: relative;
+}
+
+.volumeProgressLine {
+  width: 100%;
+  /* Стилизация ползунка */
+  appearance: none;
+  background: transparent;
+  height: 8px;
+  cursor: pointer;
+  position: relative;
+}
+
+.volumeProgressLine::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 2px;
+  background: #ffffff;
+  z-index: 1;
+  width: 0%;
+  transition: width 0.2s;
+  transform: translateY(-50%);
+}
+
+.volumeProgressLine::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  height: 2px;
+  background: #797979;
+  z-index: 0;
+  width: 100%;
+  transform: translateY(-50%);
+}
+
+.volumeProgressLine::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ffffff;
+  position: relative;
+  z-index: 2;
+}
+
+.volumeProgressLine::-moz-range-thumb {
+  border: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ffffff;
+  position: relative;
+  z-index: 2;
+}
+
+.volumeProgressLine::-ms-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ffffff;
+  position: relative;
+  z-index: 2;
 }
