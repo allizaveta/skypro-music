@@ -3,18 +3,16 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import ReduxProvider from "@/store/ReduxProvider";
 
-const montserrat = Montserrat({ subsets: ["cyrillic"] });
+const montserrat = Montserrat({ subsets: ["latin", "cyrillic"] });
 
 export const metadata: Metadata = {
-  title: "Skypro music",
+  title: "SkyPro Music",
   description: "Слушай",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+type RootLayoutType = Readonly<{ children: React.ReactNode }>;
+
+export default function RootLayout({ children }: RootLayoutType) {
   return (
     <html lang="ru">
       <ReduxProvider>

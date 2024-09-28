@@ -1,0 +1,74 @@
+.filter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 51px;
+}
+
+.filterTitle {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  margin-right: 5px;
+}
+
+.filterButtonWrapper {
+  position: relative;
+}
+
+.filterButton {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  border: 1px solid #ffffff;
+  border-radius: 60px;
+  padding: 6px 20px;
+}
+
+.filterListContainer {
+  position: absolute;
+  width: max-content;
+  top: 48px;
+  background: #313131;
+  border-radius: 12px;
+  padding: 34px;
+}
+
+.filterList {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.filterListLong {
+  max-height: 237px;
+  padding-right: 14px;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    width: 4px;
+    background: #4b4949;
+    padding-left: 24px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #ffffff;
+    border-right: 10px;
+  }
+}
+
+.filterLine:hover {
+  text-decoration: underline;
+  color: #b672ff;
+}

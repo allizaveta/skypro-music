@@ -1,0 +1,131 @@
+.trackContainer {
+  width: 100%;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.track {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.trackTitle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 447px;
+}
+
+.trackTitleImage {
+  width: 51px;
+  height: 51px;
+  padding: 16px;
+  background: #313131;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 17px;
+
+  & svg {
+    width: 18px;
+    height: 17px;
+    fill: transparent;
+    stroke: #4e4e4e;
+  }
+}
+
+.trackMark {
+  min-width: 19px;
+  max-width: 19px;
+  height: 19px;
+  position: relative;
+  border-radius: 50%;
+  background: #b672ff;
+
+  &.animated {
+    animation: pulsation 1.5s ease-in-out infinite both;
+  }
+}
+
+@keyframes pulsation {
+  0% {
+    scale: 1;
+  }
+  50% {
+    scale: 0.7;
+  }
+  100% {
+    scale: 1;
+  }
+}
+
+.trackTitleLink {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+
+  & span {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #4e4e4e;
+  }
+}
+
+.trackAuthor {
+  width: 321px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.trackAuthorLink {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+  text-align: left;
+}
+
+.trackAlbum {
+  width: 245px;
+}
+
+.trackAlbumLink {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #696969;
+}
+
+.trackTime {
+  display: flex;
+  gap: 17px;
+
+  & div,
+  & svg {
+    width: 14px;
+    height: 12px;
+  }
+
+  & svg {
+    fill: transparent;
+    stroke: #696969;
+  }
+}
+
+.trackTimeText {
+  width: 32px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: right;
+  color: #696969;
+}

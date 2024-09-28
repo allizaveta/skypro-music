@@ -1,82 +1,167 @@
-import { TrackType } from "@/types/tracks";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type PlaylistStateType = {
-  currentTrack: null | TrackType;
-  playlist: TrackType[];
-  shuffledPlaylist: TrackType[];
-  isShuffle: boolean;
-  isPlaying: boolean;
-};
+import { TracksAPI } from "@/api/tracks";
+import {
+  CatalogsCollectionType,
+  PlaylistType,
+  TrackType,
+} from "@/types/tracksTypes";
+import { isError } from "@/types/errorsTypes";
 
-const initialState: PlaylistStateType = {
-  currentTrack: null,
-  playlist: [],
+const getTracks = createAsyncThunk("playlist/getTracks", TracksAPI.getTracks);
+const getfavoriteTracks = createAsyncThunk(
+  "playlist/getfavoriteTracks",
+  TracksAPI.getfavoriteTracks
+);
+const getCatalogs = createAsyncThunk(
+  "playlist/getCatalogs",
+  TracksAPI.getCatalogs
+);
+
+interface PlaylistState {
+  activePlaylist: PlaylistType;
+  shuffledPlaylist: PlaylistType;
+  favoriteTracks: PlaylistType;
+  catalogs: CatalogsCollectionType;
+  catalogName: string;
+  currentTrack: TrackType | null;
+  isPaused: boolean;
+  isShuffled: boolean;
+}
+
+interface PlaylistInfo {
+  playlist: PlaylistType;
+  track: TrackType;
+}
+
+const initialState: PlaylistState = {
+  activePlaylist: [],
   shuffledPlaylist: [],
-  isShuffle: false,
-  isPlaying: false,
+  favoriteTracks: [],
+  catalogs: [],
+  catalogName: "",
+  currentTrack: null,
+  isPaused: true,
+  isShuffled: false,
 };
 
-const playlistSlice = createSlice({
+export function getEmptyTrack(): TrackType {
+  return {
+    _id: 0,
+    name: "",
+    author: "",
+    release_date: "",
+    genre: [],
+    duration_in_seconds: 0,
+    album: "",
+    track_file: "",
+    staredUser: [],
+    logo: {
+      type: "",
+      data: [],
+    },
+  };
+}
+
+export const playlistSlice = createSlice({
   name: "playlist",
   initialState,
   reducers: {
-    setCurrentTrack: (
+    setActivePlaylist(state, action: PayloadAction<PlaylistType>) {
+      state.activePlaylist = action.payload;
+    },
+    setActivePlaylistAndTrackInside(
       state,
-      action: PayloadAction<{ track: TrackType; tracks: TrackType[] }>
-    ) => {
+      action: PayloadAction<PlaylistInfo>
+    ) {
+      state.activePlaylist = action.payload.playlist;
       state.currentTrack = action.payload.track;
-      state.playlist = action.payload.tracks;
-      state.shuffledPlaylist = [...action.payload.tracks].sort(
-        () => 0.5 - Math.random()
-      );
-      state.isPlaying = true;
+
+      if (state.isShuffled)
+        state.shuffledPlaylist = state.activePlaylist.toSorted(
+          () => 0.5 - Math.random()
+        );
+      else state.shuffledPlaylist = state.activePlaylist;
     },
-    setNextTrack: (state) => {
-      const playlist = state.isShuffle
-        ? state.shuffledPlaylist
-        : state.playlist;
-      const currentTrackIndex = playlist.findIndex(
+    setCatalogName(state, action: PayloadAction<string>) {
+      state.catalogName = action.payload;
+    },
+    setCurrentTrack(state, action: PayloadAction<TrackType>) {
+      state.currentTrack = action.payload;
+    },
+    selectPrevTrack(state) {
+      const index = state.shuffledPlaylist.findIndex(
         (track) => track._id === state.currentTrack?._id
       );
-      const newTrack = playlist[currentTrackIndex + 1];
-      if (newTrack) {
-        state.currentTrack = newTrack;
-        state.isPlaying = true;
-      }
+      const track = state.shuffledPlaylist[index - 1];
+
+      if (track) state.currentTrack = track;
     },
-    setPrevTrack: (state) => {
-      const playlist = state.isShuffle
-        ? state.shuffledPlaylist
-        : state.playlist;
-      const currentTrackIndex = playlist.findIndex(
+    selectNextTrack(state, action: PayloadAction<boolean>) {
+      const index = state.shuffledPlaylist.findIndex(
         (track) => track._id === state.currentTrack?._id
       );
-      const newTrack = playlist[currentTrackIndex - 1];
-      if (newTrack) {
-        state.currentTrack = newTrack;
-        state.isPlaying = true;
-      }
+      const track = state.shuffledPlaylist[index + 1];
+
+      if (track) state.currentTrack = track;
+      else if (action.payload) state.isPaused = true;
     },
-    setIsShuffle: (state, action: PayloadAction<boolean>) => {
-      state.isShuffle = action.payload;
+    setIsPaused(state, action: PayloadAction<boolean>) {
+      state.isPaused = action.payload;
     },
-    playTrack: (state) => {
-      state.isPlaying = true;
+    toggleIsShuffled(state) {
+      console.log("toggleIsShuffled", state.isShuffled);
+
+      state.isShuffled = !state.isShuffled;
+
+      if (state.isShuffled)
+        state.shuffledPlaylist = state.activePlaylist.toSorted(
+          () => 0.5 - Math.random()
+        );
+      else state.shuffledPlaylist = state.activePlaylist;
     },
-    pauseTrack: (state) => {
-      state.isPlaying = false;
+    likeTrack(state, action: PayloadAction<TrackType>) {
+      state.favoriteTracks.push(action.payload);
     },
+    dislikeTrack(state, action: PayloadAction<TrackType>) {
+      state.favoriteTracks = state.favoriteTracks.filter(
+        (track) => track._id !== action.payload._id
+      );
+    },
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(getTracks.fulfilled, (state, action) => {
+        if (!isError(action.payload)) state.activePlaylist = action.payload;
+      })
+      .addCase(getTracks.rejected, (state, action) => {
+        console.error("Error:", action.error.message);
+      })
+      .addCase(getfavoriteTracks.fulfilled, (state, action) => {
+        state.favoriteTracks = action.payload;
+      })
+      .addCase(getfavoriteTracks.rejected, (state, action) => {
+        console.error("Error:", action.error.message);
+      })
+      .addCase(getCatalogs.fulfilled, (state, action) => {
+        state.catalogs = action.payload;
+      })
+      .addCase(getCatalogs.rejected, (state, action) => {
+        console.error("Error:", action.error.message);
+      });
   },
 });
 
+export { getTracks, getfavoriteTracks, getCatalogs };
 export const {
-  setCurrentTrack,
-  setNextTrack,
-  setPrevTrack,
-  setIsShuffle,
-  playTrack,
-  pauseTrack,
+  setActivePlaylist,
+  setActivePlaylistAndTrackInside,
+  setCatalogName,
+  setIsPaused,
+  selectPrevTrack,
+  selectNextTrack,
+  toggleIsShuffled,
+  likeTrack,
+  dislikeTrack,
 } = playlistSlice.actions;
-
 export const playlistReducer = playlistSlice.reducer;
