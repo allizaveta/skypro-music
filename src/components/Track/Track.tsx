@@ -24,7 +24,7 @@ export default function Track({ playlist, track }: Props) {
   }
 
   const isCurrent: boolean =
-    Boolean(currentTrack) && currentTrack._id === track._id;
+    Boolean(currentTrack) && currentTrack?._id === track._id;
 
   return (
     <div className={styles.trackContainer} onClick={handleTrackClick}>
