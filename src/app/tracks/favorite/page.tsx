@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "../../Tracks.module.css";
+import styles from "../Tracks.module.css";
 import { useEffect } from "react";
 import { TracksAPI } from "@/api/tracks";
 import Playlist from "@/components/Playlist/Playlist";
