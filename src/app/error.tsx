@@ -14,8 +14,8 @@ export default function Error({ error, reset }: Props) {
 
   return (
     <div>
-      <h2>Something went wrong!</h2>
-      <button onClick={() => reset()}>Try again</button>
+      <h2>Что-то пошло не такк</h2>
+      <button onClick={() => reset()}>Попробовать снова</button>
     </div>
   );
 }
