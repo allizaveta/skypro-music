@@ -1,17 +1,16 @@
 "use client";
 
-import styles from "../Tracks.module.css";
+import styles from "../../Tracks.module.css";
 import { useEffect } from "react";
-
-import { TracksAPI } from "@/api/tracks";
 import { useAppDispatch, useAppSelector } from "@/store/store";
-import Filter from "@/components/Filter/Filter";
-import Playlist from "@/components/Playlist/Playlist";
-import { isError } from "@/types/errorsTypes";
 import {
   setActivePlaylist,
   setCatalogName,
 } from "@/store/features/playlistSlice";
+import { TracksAPI } from "@/api/tracks";
+import { isError } from "@/types/errorsTypes";
+import Filter from "@/components/Filter/Filter";
+import Playlist from "@/components/Playlist/Playlist";
 
 interface Props {
   params: {
