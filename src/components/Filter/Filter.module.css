@@ -74,7 +74,7 @@
   color: #b672ff;
 }
 .filterCounter {
-  background-color: #b672ff;
+  background-color: #9a48f1;
   color: #ffffff;
   border: none;
   border-radius: 50%;
@@ -84,4 +84,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  position: absolute;
+  top: -10px;
+  right: 0;
 }
