@@ -73,3 +73,15 @@
   text-decoration: underline;
   color: #b672ff;
 }
+.filterCounter {
+  background-color: #b672ff;
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
