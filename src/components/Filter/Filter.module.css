@@ -88,3 +88,6 @@
   top: -10px;
   right: 0;
 }
+.active {
+  color: #9a48f1;
+}
