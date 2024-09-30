@@ -2,6 +2,7 @@ import styles from "../Filter.module.css";
 import shared from "@/components/SharedButtons/SharedButtons.module.css";
 import cn from "classnames";
 import FilterList from "../FilterList/FilterList";
+import { useMemo } from "react";
 
 interface Props {
   title: string;
@@ -20,14 +21,15 @@ export default function FilterButton({
   opened,
   openFilter,
 }: Props) {
+  const filterButtonClasses = useMemo(() => {
+    return cn(styles.filterButton, shared.btnText, {
+      [shared.active]: activeCounter,
+    });
+  }, [activeCounter]);
+
   return (
     <div className={styles.filterButtonWrapper}>
-      <div
-        className={cn(styles.filterButton, shared.btnText, {
-          [shared.active]: activeCounter,
-        })}
-        onClick={() => openFilter(title)}
-      >
+      <div className={filterButtonClasses} onClick={() => openFilter(title)}>
         {title}
       </div>
 
