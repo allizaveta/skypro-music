@@ -1,6 +1,21 @@
+"use client";
+
 import styles from "./Searchbar.module.css";
 
+import { useDispatch } from "react-redux";
+import React, { useState } from "react";
+import { setFilter } from "@/store/features/playlistSlice";
+
 export default function Searchbar() {
+  const dispatch = useDispatch();
+  const [queryText, setQueryText] = useState<string>("");
+
+  function handleChangeQueryText(event: React.ChangeEvent<HTMLInputElement>) {
+    const value = event.target.value;
+    setQueryText(value);
+    dispatch(setFilter({ kind: "queryText", value }));
+  }
+
   return (
     <div className={styles.search}>
       <svg>
@@ -10,7 +25,9 @@ export default function Searchbar() {
         className={styles.searchText}
         type="search"
         placeholder="Поиск"
-        name="search"
+        name="queryText"
+        value={queryText}
+        onChange={handleChangeQueryText}
       />
     </div>
   );
