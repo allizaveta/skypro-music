@@ -1,39 +1,92 @@
 "use client";
 
-import { FilterKind, PlaylistType } from "@/types/tracksTypes";
 import styles from "./Filter.module.css";
-import { useState } from "react";
+import cn from "classnames";
+
 import FilterButton from "./FilterButton/FilterButton";
 
-const filterKind: string[] = [
-  FilterKind.artist,
-  FilterKind.genre,
-  FilterKind.year,
+import { useState } from "react";
+import { FilterKinds, PlaylistType, SortOptions } from "@/types/tracksTypes";
+import { FiltersType } from "@/store/features/playlistSlice";
+
+const filterKinds: string[] = [
+  "1", // "Искать по:"
+  FilterKinds.authors,
+  FilterKinds.genres,
+  "2", // "Упорядочить по:"
+  FilterKinds.year,
 ];
 
 interface Props {
-  playlist: PlaylistType;
+  visiblePlaylist: PlaylistType;
+  filteredPlaylist: PlaylistType;
+  filters: FiltersType;
 }
 
-export default function Filter({ playlist }: Props) {
+export default function Filter({
+  visiblePlaylist,
+  filteredPlaylist,
+  filters,
+}: Props) {
   const [openedFilter, setOpenedFilter] = useState<string | null>(null);
 
   function getUniqueLists(filter: string): string[] {
     switch (filter) {
-      case FilterKind.artist:
+      case FilterKinds.authors:
         return Array.from(
-          new Set<string>(playlist.map((track) => track.author))
+          new Set<string>(visiblePlaylist.map((track) => track.author))
         )
           .filter((line) => line !== "-")
           .sort();
-      case FilterKind.genre:
+      case FilterKinds.genres:
         return Array.from(
-          new Set<string>(playlist.map((track) => track.genre).flat())
+          new Set<string>(visiblePlaylist.map((track) => track.genre).flat())
         ).sort();
-      case FilterKind.year:
+      case FilterKinds.year:
         return ["По умолчанию", "Сначала новые", "Сначала старые"];
       default:
         return [];
+    }
+  }
+
+  function getListCounters(
+    filter: string,
+    list: string[]
+  ): Record<string, number> {
+    const counters: Record<string, number> = { "": 0 };
+
+    if (filter === FilterKinds.authors)
+      for (const item of list) {
+        const value = filteredPlaylist.reduce(
+          (acc, track) => (track.author === item ? ++acc : acc),
+          0
+        );
+
+        if (value) counters[item] = value;
+      }
+    else if (filter === FilterKinds.genres)
+      for (const item of list) {
+        const value = filteredPlaylist.reduce(
+          (acc, track) => (track.genre.includes(item) ? ++acc : acc),
+          0
+        );
+
+        if (value) counters[item] = value;
+      }
+
+    return counters;
+  }
+
+  function getCounter(filter: string): number {
+    switch (filter) {
+      case FilterKinds.authors:
+        return filters.authors.length;
+      case FilterKinds.genres:
+        return filters.genres.length;
+      case FilterKinds.year:
+        return filters.sort !== SortOptions.disabled ? -1 : 0;
+      default:
+        return 0;
     }
   }
 
@@ -44,9 +97,29 @@ export default function Filter({ playlist }: Props) {
 
   return (
     <div className={styles.filter}>
-      <div className={styles.filterTitle}>Искать по:</div>
-      {filterKind.map((filter, index) => {
+      {filterKinds.map((filter, index) => {
+        if (filter === "1")
+          return (
+            <div key={index} className={styles.filterTitle}>
+              Искать по:
+            </div>
+          );
+        else if (filter === "2")
+          return (
+            <div key={index} className={cn(styles.filterTitle, styles.second)}>
+              Упорядочить по:
+            </div>
+          );
+
         const list = getUniqueLists(filter);
+        const counters = getListCounters(filter, list);
+        const counter = getCounter(filter);
+
+        list.sort(
+          (lhs, rhs) =>
+            ((counters[rhs] ? 1 : 0) - (counters[lhs] ? 1 : 0)) * 1000 +
+            lhs.localeCompare(rhs)
+        );
 
         if (openedFilter && !list.length) setOpenedFilter(null);
 
@@ -54,9 +127,11 @@ export default function Filter({ playlist }: Props) {
           <FilterButton
             key={index}
             title={filter}
+            filterList={list}
+            filterCounters={counters}
+            activeCounter={counter}
             opened={openedFilter === filter}
             openFilter={handleOpenedFilter}
-            filterList={list}
           />
         );
       })}

@@ -5,26 +5,45 @@ import FilterList from "../FilterList/FilterList";
 
 interface Props {
   title: string;
-  opened: boolean;
   filterList: string[];
+  filterCounters: Record<string, number>;
+  activeCounter: number;
+  opened: boolean;
   openFilter: (filter: string) => void;
 }
 
 export default function FilterButton({
   title,
-  opened,
   filterList,
+  filterCounters,
+  activeCounter,
+  opened,
   openFilter,
 }: Props) {
   return (
     <div className={styles.filterButtonWrapper}>
       <div
-        className={cn(styles.filterButton, shared.btnText)}
+        className={cn(styles.filterButton, shared.btnText, {
+          [shared.active]: activeCounter,
+        })}
         onClick={() => openFilter(title)}
       >
         {title}
       </div>
-      {opened && <FilterList filterOptions={filterList} />}
+
+      {activeCounter > 0 && (
+        <button type="button" className={styles.filterCounter}>
+          {activeCounter}
+        </button>
+      )}
+
+      {opened && (
+        <FilterList
+          title={title}
+          filterOptions={filterList}
+          filterCounters={filterCounters}
+        />
+      )}
     </div>
   );
 }

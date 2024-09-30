@@ -5,11 +5,11 @@ import {
   useStore,
 } from "react-redux";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { playlistReducer } from "@/store/features/playlistSlice";
 import { userReducer } from "@/store/features/userSlice";
+import { playerReducer } from "./features/playlistSlice";
 
 const rootReducer = combineReducers({
-  playlist: playlistReducer,
+  player: playerReducer,
   user: userReducer,
 });
 

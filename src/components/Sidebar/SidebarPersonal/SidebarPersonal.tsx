@@ -1,13 +1,15 @@
 "use client";
+
 import styles from "../Sidebar.module.css";
+
 import { useSafeRouter } from "@/hooks/useSafeRouter";
-import { useAppDispatch, useAppSelector } from "@/store/store";
 import { useQuit } from "@/hooks/useQuit";
+import { useAppDispatch, useAppSelector } from "@/store/store";
 import { setIsPaused } from "@/store/features/playlistSlice";
-import { useInitfavoriteTracks } from "@/hooks/useInitFavoriteTracks";
+import { useInitFavouriteTracks } from "@/hooks/useInitFavoriteTracks";
 
 export default function SidebarPersonal() {
-  useInitfavoriteTracks();
+  useInitFavouriteTracks();
 
   const router = useSafeRouter();
   const dispatch = useAppDispatch();

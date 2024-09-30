@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { UserAPI } from "@/api/users";
-import { ErrorMessage, getEmptyError, isError } from "@/types/errorsTypes";
+import type { RootState } from "@/store/store";
 import { TokensPair, UserType } from "@/types/usersTypes";
+import { ErrorMessage, getEmptyError, isError } from "@/types/errorsTypes";
 
 const signIn = createAsyncThunk("user/getUser", UserAPI.signIn);
 const signUp = createAsyncThunk("user/addUser", UserAPI.signUp);
@@ -103,6 +104,8 @@ export const userSlice = createSlice({
   },
 });
 
+export const checkToken = (state: RootState) =>
+  Boolean(state.user.tokens.access);
 export { signIn, signUp, getTokens, refreshTokens };
 export const { publicError, signOut } = userSlice.actions;
 export const userReducer = userSlice.reducer;

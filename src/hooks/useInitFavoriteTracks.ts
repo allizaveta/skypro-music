@@ -1,12 +1,12 @@
-import { getfavoriteTracks } from "@/store/features/playlistSlice";
-import { useAppDispatch, useAppSelector } from "@/store/store";
 import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "@/store/store";
+import { getFavouriteTracks } from "@/store/features/playlistSlice";
 
-export function useInitfavoriteTracks() {
+export function useInitFavouriteTracks() {
   const dispatch = useAppDispatch();
   const tokens = useAppSelector((state) => state.user.tokens);
 
   useEffect(() => {
-    if (tokens.access) dispatch(getfavoriteTracks(tokens));
+    if (tokens.access) dispatch(getFavouriteTracks(tokens));
   }, [tokens, dispatch]);
 }

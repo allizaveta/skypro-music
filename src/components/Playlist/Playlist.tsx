@@ -1,17 +1,24 @@
-import { PlaylistType, TrackType } from "@/types/tracksTypes";
 import styles from "./Playlist.module.css";
 import cn from "classnames";
+import { PlaylistType, TrackType } from "@/types/tracksTypes";
 import { ErrorMessage } from "@/types/errorsTypes";
 import ErrorBlock from "../ErrorBlock/ErrorBlock";
 import Track from "../Track/Track";
+import PlaylistSkeleton from "../PlaylistSkeleton/PlaylistSkeleton";
 
 interface Props {
   playlist: PlaylistType;
+  isLoading: boolean;
   errorMsg: ErrorMessage | null;
 }
 
-export default function Playlist({ playlist, errorMsg }: Props) {
+export default function Playlist({ playlist, isLoading, errorMsg }: Props) {
   if (errorMsg) return <ErrorBlock errorMsg={errorMsg} />;
+
+  if (!isLoading && !playlist.length)
+    return (
+      <div className={styles.playlistWrapper}>Ого! Треки не найдены...</div>
+    );
 
   return (
     <div className={styles.playlistWrapper}>
@@ -26,9 +33,13 @@ export default function Playlist({ playlist, errorMsg }: Props) {
         </div>
       </div>
       <div className={styles.playlistContent}>
-        {playlist?.map((track: TrackType) => (
-          <Track key={track._id} playlist={playlist} track={track} />
-        ))}
+        {isLoading ? (
+          <PlaylistSkeleton />
+        ) : (
+          playlist?.map((track: TrackType) => (
+            <Track key={track._id} playlist={playlist} track={track} />
+          ))
+        )}
       </div>
     </div>
   );

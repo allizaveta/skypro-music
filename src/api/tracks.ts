@@ -76,6 +76,16 @@ export const TracksAPI = {
     });
   },
 
+  async getFavouriteTracks(tokens: TokensPair) {
+    const endpoint = `${TracksAPI.uri}/catalog/track/favorite/all/`;
+
+    return await TracksAPI.requestToEndPoint(endpoint, tokens.refresh, {
+      headers: {
+        Authorization: `Bearer ${tokens.access}`,
+      },
+    });
+  },
+
   async getCatalogs(): Promise<CatalogsCollectionType> {
     const endpoint = `${TracksAPI.uri}/catalog/selection/all/`;
 
