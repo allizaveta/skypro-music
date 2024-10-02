@@ -1,0 +1,45 @@
+.btn {
+  cursor: pointer;
+}
+
+.btnText {
+  cursor: pointer;
+
+  &:hover {
+    border-color: #d9b6ff;
+    color: #d9b6ff;
+  }
+
+  &:active {
+    border-color: #ad61ff;
+    color: #ad61ff;
+  }
+}
+
+.btnIcon {
+  cursor: pointer;
+
+  &:hover svg {
+    fill: transparent;
+    stroke: #acacac;
+  }
+
+  &:active svg {
+    fill: transparent;
+    stroke: #ffffff;
+  }
+
+  &:active.like svg {
+    fill: #696969;
+    stroke: #ffffff;
+  }
+
+  &.active svg {
+    fill: #fff;
+    stroke: #fff;
+  }
+
+  &.liked svg {
+    fill: #ad61ff;
+  }
+}

@@ -1,0 +1,81 @@
+.player {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.playerControls {
+  display: flex;
+  flex-direction: row;
+  padding: 0 27px 0 31px;
+}
+
+.playerBtnPrev,
+.playerBtnPlay,
+.playerBtnNext,
+.playerBtnRepeat,
+.playerBtnShuffle {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.playerBtnPrev {
+  margin-right: 23px;
+
+  & svg {
+    width: 15px;
+    height: 14px;
+  }
+}
+
+.playerBtnPlay {
+  margin-right: 23px;
+
+  & svg {
+    width: 22px;
+    height: 20px;
+    fill: #d9d9d9;
+  }
+}
+
+.playerBtnNext {
+  margin-right: 28px;
+  fill: #a53939;
+
+  & svg {
+    width: 15px;
+    height: 14px;
+    fill: inherit;
+    stroke: #d9d9d9;
+  }
+}
+
+.playerBtnRepeat {
+  margin-right: 24px;
+
+  & svg {
+    width: 18px;
+    height: 12px;
+    fill: transparent;
+    stroke: #696969;
+  }
+}
+
+.playerBtnShuffle {
+  display: flex;
+  align-items: center;
+
+  & svg {
+    width: 19px;
+    height: 12px;
+    fill: transparent;
+    stroke: #696969;
+  }
+}
+
+.playerTrackPlay {
+  display: flex;
+  flex-direction: row;
+}

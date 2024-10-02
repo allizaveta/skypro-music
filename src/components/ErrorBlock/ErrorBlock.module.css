@@ -1,0 +1,16 @@
+.errorBlock {
+  & h4,
+  & b {
+    color: #ef84a1;
+    font-size: 16px;
+  }
+
+  & h4 {
+    margin-bottom: 12px;
+  }
+
+  & b {
+    text-wrap: nowrap;
+    text-decoration: underline;
+  }
+}

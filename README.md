@@ -1,36 +1,21 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Страница треков (главная).
 
-## Getting Started
+На странице отображены все треки, имеющиеся в апи. Треки отображаются вне зависимости от статуса авторизации. При нажатии на трек он начинает проигрываться. Трек ставится на паузу, перематывается, переключается на предыдущий и следущий. Может быть зациклен или перемешан. Меняется громкость трека. Пока главная страница прогружается, пользователь видит экран скелетона. Изначально нижний плеер скрыт. Он показывается, только когда пользователь нажимает на любой из треков. При перезагрузке страницы плеер тоже скрыт. Клик по пустому сердечку добавляет трек в Мои треки. Клик по залитому сердечку - убирает трек со страницы Мои треки. В списке треков фиолетовой точкой отображается текущий трек. Если текущий трек воспроизводится, то точка “пульсирует”. “Выйти” разголинивает пользователя. При разлогине показывается экран входа
+в приложение
 
-First, run the development server:
+# Страница авторизации/регистрации.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+На странице пользователь имеет возможность войти в приложение или зарегистрироваться. Если данные были введены некорректно, пользователю показывается ошибка в соответствии с макетом.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Страница избранных треков.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+На странице отображаются все треки, которые лайкнул пользователь, убрав лайк- трек убирается из подборки.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# Страница отфильтрованных треков.
 
-## Learn More
+Пользователь вводит название трека в строке “Поиск”, и происходит их фильтрация по названию. Это значит, что, если пользователь ввел "tro", ему выдаст трек с названием "Elektro" и все треки, в названиях которых есть строка tro: "Troelf", "FooTroBar". Пользователь может искать треки по исполнителю и жанру. Пользователь может сортировать треки по дате релиза. При нажатии на “исполнителю”, “году выпуска”, “жанру” на этих кнопках показывается таб с указанием количества значений.
 
-To learn more about Next.js, take a look at the following resources:
+# Страница подборок.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+При нажатии на любую из подборок, пользователь переходит на страницу с нужной подборкой.
+В ней отображаются все треки, которые в нее входят

@@ -1,0 +1,46 @@
+.sidebar {
+  width: 418px;
+  padding: 20px 90px 20px 78px;
+}
+
+.sidebarPersonal {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 12px 0 15px 0;
+}
+
+.sidebarPersonalName {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+  margin-right: 16px;
+}
+
+.sidebarIcon {
+  background-color: #313131;
+  border-radius: 50%;
+  cursor: pointer;
+
+  &,
+  & svg {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.sidebarList {
+  height: 100%;
+  padding: 240px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+
+  & img {
+    display: block;
+  }
+}
